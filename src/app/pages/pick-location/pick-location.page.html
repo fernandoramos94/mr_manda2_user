@@ -1,0 +1,42 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-title>Buscar ubicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [placeholder]="('Buscar ubicación')" select-all (ionChange)="onSearchChange($event)"
+    [debounce]="250" mode="ios" [(ngModel)]="autocomplete1.query">
+  </ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let item of autocompleteItems1" (click)="selectSearchResult1(item)">
+      {{ item.description }}
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="getLocation()" expand="block" fill="clear" shape="round" color="primary">
+   Usar mi ubicación actual
+  </ion-button>
+  <p class="ion-text-center"></p>
+  <div #map id="map" class="map"></div>
+  <div style="margin-top: 20px;padding: 30px;" *ngIf="lat && lng">
+    <ion-button (click)="selectedAddress()" expand="block" shape="round" color="primary">
+      Usar esta ubicación
+    </ion-button>
+  </div>
+</ion-content>

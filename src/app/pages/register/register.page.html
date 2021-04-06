@@ -1,0 +1,134 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-content class="ion-padding">
+  <div class="login-logo">
+    <img src="assets/icon.png" class="logo_icon" alt="foodies">
+    <p class="login-name">Registrarse</p>
+    <p class="subTitle">Ingresa los datos<br>
+      para acceder a tu cuenta</p>
+  </div>
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list lines="none">
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.email" type="email" [placeholder]="('Correo')" name="email"
+          #email="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+          Correo es requerido
+        </p>
+      </ion-text>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.password" name="password" [placeholder]="('Contraseña')"
+          type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Contraseña es requerida
+        </p>
+      </ion-text>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.first_name" type="text" [placeholder]="('Nombre')"
+          name="full_name" #full_name="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="full_name.valid || submitted == false" class="ion-padding-start">
+          Nombre es requerido
+        </p>
+      </ion-text>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.last_name" type="text" [placeholder]="('Apellido')" name="lname"
+          #lname="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="lname.valid || submitted == false" class="ion-padding-start">
+          Apellido
+        </p>
+      </ion-text>
+
+      <!-- Country -->
+
+      <ion-row>
+        <ion-col size="3" (click)="openCountry()">
+          <ion-item lines="none">
+            <ion-input style="font-size: 12px;" [(ngModel)]="login.cc" disabled="true" type="text" name="ccode"
+              #ccode="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="9">
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="login.mobile" type="number" [placeholder]="('Teléfono')"
+              name="mobile" #phone="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+          <ion-text color="danger">
+            <p [hidden]="phone.valid || submitted == false" class="ion-padding-start">
+              Teléfono es requerido
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <!-- Country -->
+
+      <ion-item lines="none">
+        <ion-label>Género</ion-label>
+        <ion-select okText="Okay" cancelText="Dismiss" interface="popover" [(ngModel)]="login.gender" name="gender"
+          #gender="ngModel" required>
+          <ion-select-option value="1"> Masculino </ion-select-option>
+          <ion-select-option value="0"> Femenino </ion-select-option>
+          <ion-select-option value="2"> Otro </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+    </ion-list>
+
+    <div class="div_chk">
+      <ion-checkbox [checked]="login.check" [(ngModel)]="login.check" name="checkls" #checkls="ngModel" color="light"
+        class="chk"></ion-checkbox>
+      <ion-label class="lbl_police"><span class="span_term">
+          Al apretar aceptar o al utilizar esta aplicación, estás aprobando automaticamente nuestras Términos y Condiciones 
+          que puedes encontrar en:
+        </span>
+        <u> <a style="color: var(--ion-color-primary);" (click)="open('privacy')"> Términos y Condiciones
+          </a> </u>
+        de esta aplicación
+      </ion-label>
+    </div>
+    <ion-text color="danger">
+      <p [hidden]="checkls.valid || submitted == false" class="ion-padding-start">
+        Por favor acepta nuestras politicas de privacidad
+      </p>
+    </ion-text>
+
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-button class="btn_class" (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="isLogin">
+          <span *ngIf="!isLogin"> INICIAR</span>
+          <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+  <p class="createAcc" (click)="back()">Ya tengo una cuenta
+    <span class="registerTag">Iniciar sesión</span>
+  </p>
+</ion-content>

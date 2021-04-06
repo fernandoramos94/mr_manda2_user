@@ -1,0 +1,157 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="changeLocation()">
+        <ion-icon slot="icon-only" name="location"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title (click)="changeLocation()"> {{util.cityAddress}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="util.openMenu()">
+        <img class="menuIcon" src="assets/sidemenu/menu.png" alt="">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="div_searchbar">
+    <ion-searchbar animated="true" mode="ios" [placeholder]="('Buscar comercios')"
+      (ionChange)="onSearchChange($event)" [debounce]="250" class="search_bar"></ion-searchbar>
+  </div>
+  <div class="chips_div animated fadeInDown" *ngIf="allRest?.length">
+    <ion-label class="chip" *ngFor="let item of chips;let i = index" (click)="addFilter(i)">{{item}}</ion-label>
+  </div>
+</ion-header>
+
+
+<ion-content>
+
+
+
+  <div class="noData" *ngIf="!dummy?.length && !allRest?.length" [style.backgroundImage]="'url(assets/nothing.jpg)'">
+  </div>
+  <p style="font-weight: bold;text-align: center;" *ngIf="!dummy?.length && !allRest?.length">
+    No se encontraron comercios
+  </p>
+  <div *ngIf="util.home_type ==='0'" class="main_content_div1">
+    <ion-slides [options]="slideOpts" *ngIf="banners?.length && allRest?.length">
+      <ion-slide *ngFor="let item of banners" (click)="openOffers(item)">
+        <div class="back_image" [style.backgroundImage]="'url('+api.mediaURL+ item.banner+')'"></div>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let item of dummyBanners">
+        <ion-skeleton-text animated style="width: 100%;height: 100px;margin-left: 10px;border-radius: 5px;">
+        </ion-skeleton-text>
+      </ion-slide>
+    </ion-slides>
+
+    <div *ngFor="let item of dummy">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+
+
+
+    <div class="card_div">
+      <ion-row
+        [className]="item.isOpen === false || item.isClosed === '0' ? 'cardClosed ion-no-padding':'card ion-no-padding'"
+        *ngFor="let item of allRest">
+        <ion-col size="4">
+          <div class="image_div" (click)="openMenu(item)"
+            [ngStyle]="{'background-image':'url('+api.mediaURL+item.cover+'),url(assets/placeholder.jpg)'}">
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="desc_div" (click)="openMenu(item)">
+            <ion-label class="heading_lbl">
+              {{ (item.name.length>20)? (item.name | slice:0:20)+'..':(item.name) }}
+            </ion-label>
+          
+            <ion-label class="small_lbl">{{ (item.cusine.length>30)? (item.cusine | slice:0:30)+'..':(item.cusine) }}
+            </ion-label>
+            <ion-label class="small_lbl">{{item.dish}}$ Mínimo | {{item.time}}
+              {{util.translate('min')}} </ion-label>
+          </div>
+        </ion-col>
+        
+        <ion-col size="2">
+          <div class="ratting">
+            <ion-label class="rateNumber">{{item.rating}}</ion-label>
+          </div>
+          <p class="closed" *ngIf="item && item.isOpen === false || item.isClosed === '0'">Cerrado
+          </p>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  
+  <div  class="main_content_div2">
+    <ion-slides [options]="slideOpts" *ngIf="banners?.length && allRest?.length">
+      <ion-slide *ngFor="let item of banners" (click)="openOffers(item)">
+        <div class="back_image" [style.backgroundImage]="'url('+api.mediaURL+ item.banner+')'"></div>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let item of dummyBanners">
+        <ion-skeleton-text animated style="width: 100%;height: 100px;margin-left: 10px;border-radius: 5px;">
+        </ion-skeleton-text>
+      </ion-slide>
+    </ion-slides>
+    <ion-card *ngFor="let item of dummy">
+      <ion-skeleton-text animated
+        style="width: 100%;height: 150px;border-radius: 5px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;">
+      </ion-skeleton-text>
+      <ion-card-content>
+        <ion-badge class="number_badge" color="light" mode="ios">
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-badge>
+        <ion-label class="bold_lbl">
+          <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        </ion-label>
+        <ion-label class="small_lbl">
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </ion-label>
+        <div class="flex_div">
+          <ion-label class="distance_lbl">
+            <ion-skeleton-text animated style="width: 25px"></ion-skeleton-text>
+          </ion-label>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+ 
+  </div>
+
+  
+
+
+
+
+  
+</ion-content>

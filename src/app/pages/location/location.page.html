@@ -1,0 +1,26 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-header class="ion-no-border">
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="contents">
+    <p class="header">Para darte el mejor servicio necesitamos acceder a tu</p>
+    <p class="subHeader">Ubicación</p>
+    <img src="assets/map-location.png" alt="" class="imgs">
+    <ion-button (click)="getLocation()" expand="block" shape="round">
+      Usar ubicación actual
+    </ion-button>
+    <ion-button (click)="customLocation()" expand="block" fill="clear" shape="round">
+      Elegir ubicación
+    </ion-button>
+  </div>
+</ion-content>

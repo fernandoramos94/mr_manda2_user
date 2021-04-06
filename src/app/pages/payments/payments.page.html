@@ -1,0 +1,78 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="util.back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Generar tu pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="billing">
+    <div class="singleRow">
+      <ion-label class="headerTitle">Total productos</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.totalPrice}}</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.totalPrice}} {{util.currecny}}</ion-label>
+    </div>
+    <div class="singleRow" *ngIf="cart.discount && cart.coupon">
+      <ion-label class="headerTitle">Cupón</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='left'"> - {{util.currecny}} {{cart.discount}}</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='right'"> - {{cart.discount}} {{util.currecny}}</ion-label>
+    </div>
+    <div class="singleRow">
+      <ion-label class="headerTitle">{{util.translate('Taxes & Charges')}} ({{cart.flatTax}} %) </ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.orderTax}}</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.orderTax}} {{util.currecny}}</ion-label>
+    </div>
+    <div class="singleRow">
+      <ion-label class="headerTitle">Precio por envío</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.deliveryPrice}}</ion-label>
+      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.deliveryPrice}} {{util.currecny}}</ion-label>
+    </div>
+
+    <div class="singleRow">
+      <ion-label class="headerTotal boldClass">Total</ion-label>
+      <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.grandTotal}}
+      </ion-label>
+      <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='right'"> {{cart.grandTotal}} {{util.currecny}}
+      </ion-label>
+    </div>
+  </div>
+  <div class="header">
+    <ion-label class="title">Método de pago</ion-label>
+  </div>
+
+
+  <ion-item (click)="createOrder()" lines="none" *ngIf="havePayment && haveCOD">
+    <ion-thumbnail slot="start">
+      <img src="assets/imgs/cod.png" />
+    </ion-thumbnail>
+    <ion-label> Pagar en efectivo </ion-label>
+    <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-item (click)="paypalPayment()" lines="none" *ngIf="havePayment && havePayPal">
+    <ion-thumbnail slot="start">
+      <img src="assets/imgs/paypal.png" />
+    </ion-thumbnail>
+    <ion-label> Pagar en linea </ion-label>
+    <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+
+
+
+
+
+
+</ion-content>

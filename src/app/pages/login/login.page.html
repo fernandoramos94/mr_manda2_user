@@ -1,0 +1,148 @@
+<!-- 
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : ionic 5 foodies app
+  Created : 28-Feb-2021
+  This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2020-present initappz.
+ -->
+<ion-content class="ion-padding">
+  <div class="login-logo">
+    <img src="assets/icon.png" class="logo_icon" alt="foodies">
+    <p class="login-name">Iniciar sesión</p>
+
+  </div>
+
+  <form #loginForm="ngForm" novalidate *ngIf="util.user_login ==='0'">
+    <ion-list lines="none">
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.email" type="email" [placeholder]="('Correo')" name="email"
+          #email="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+          Correo es requerido
+        </p>
+      </ion-text>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="login.password" name="password" [placeholder]="('Contraseña')"
+          type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Contraseña es requerida
+        </p>
+      </ion-text>
+    </ion-list>
+
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <p class="frgTag" (click)="resetPass()">Olvidaste tu contraseña?</p>
+        <ion-button class="btn_class" (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="isLogin">
+          <span *ngIf="!isLogin">INICIAR</span>
+          <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+  <form #loginForm="ngForm" novalidate *ngIf="util.user_login ==='1'">
+    <ion-list lines="none">
+      <ion-row>
+        <ion-col size="3" (click)="openCountry()">
+          <ion-item lines="none">
+            <ion-input style="font-size: 12px;" [(ngModel)]="mobile.ccCode" disabled="true" type="text" name="ccode"
+              #ccode="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="9">
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="mobile.phone" type="number" [placeholder]="('Teléfono')"
+              name="mobile" #phone="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+          <ion-text color="danger">
+            <p [hidden]="phone.valid || submitted == false" class="ion-padding-start">
+              Teléfono
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="mobile.password" name="password" [placeholder]="('Contraseña')"
+          type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Contraseña
+        </p>
+      </ion-text>
+    </ion-list>
+
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <p class="frgTag" (click)="resetPass()">Olvidaste tu contraseña?</p>
+        <ion-button class="btn_class" (click)="onPhoneLogin(loginForm)" type="submit" expand="block"
+          [disabled]="isLogin">
+          <span *ngIf="!isLogin"> INICIAR</span>
+          <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+
+  <form #loginForm="ngForm" novalidate *ngIf="util.user_login ==='2'">
+    <ion-list lines="none">
+      <ion-row>
+        <ion-col size="3" (click)="openCountry()">
+          <ion-item lines="none">
+            <ion-input style="font-size: 12px;" [(ngModel)]="mobileLogin.ccCode" disabled="true" type="text"
+              name="ccode" #ccode="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="9">
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="mobileLogin.phone" type="number" [placeholder]="('Teléfono')"
+              name="mobile" #phone="ngModel" spellcheck="false" autocapitalize="off" required>
+            </ion-input>
+          </ion-item>
+          <ion-text color="danger">
+            <p [hidden]="phone.valid || submitted == false" class="ion-padding-start">
+             Teléfono es requerido
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <p class="frgTag" (click)="resetPass()">Olvidaste tu contraseña?</p>
+        <ion-button class="btn_class" (click)="onOTPLogin(loginForm)" type="submit" expand="block" [disabled]="isLogin">
+          <span *ngIf="!isLogin"> INICIAR</span>
+          <ion-spinner name="circles" *ngIf="isLogin"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+  <p class="createAcc" (click)="register()">Aún no tienes una contraseña?
+    <span class="registerTag">Registrar</span>
+  </p>
+
+</ion-content>
