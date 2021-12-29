@@ -7,6 +7,15 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2020-present initappz.
  -->
+ <ion-header no-shadow no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="util.back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding">
   <div class="login-logo">
     <img src="assets/icon.png" class="logo_icon" alt="foodies">
@@ -141,7 +150,7 @@
 
   </form>
 
-  <p class="createAcc" (click)="register()">Aún no tienes una contraseña?
+  <p class="createAcc" (click)="register()">Aún no tienes una cuenta?
     <span class="registerTag">Registrar</span>
   </p>
 

@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -27,10 +19,10 @@ export class RatePage implements OnInit {
     private router: Router,
     private modalCtrl: ModalController
   ) {
-    console.log(this.util.orderDetails);
+  // console.log(this.util.orderDetails);
     if (this.util.orderDetails && this.util.orderDetails.orders) {
       this.products = JSON.parse(this.util.orderDetails.orders);
-      console.log(this.products);
+    // console.log(this.products);
     } else {
       this.util.errorToast('Something went wrong');
       this.navCtrl.back();
@@ -43,7 +35,7 @@ export class RatePage implements OnInit {
   ngOnInit() {
   }
   onRatingChange(event) {
-    console.log(event);
+  // console.log(event);
   }
 
 

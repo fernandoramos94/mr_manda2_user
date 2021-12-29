@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
@@ -46,7 +38,7 @@ export class VariationsPage implements OnInit {
     const info = this.navParma.get('food');
     this.foodInfo = info;
     this.selectedItem = info;
-    console.log('info', info);
+  // console.log('info', info);
     this.productName = info.name;
     this.lists = info.variations;
     const userCart = localStorage.getItem('userCart');
@@ -71,7 +63,7 @@ export class VariationsPage implements OnInit {
   }
 
   radioGroupChange(event, title) {
-    console.log(this.lists);
+  // console.log(this.lists);
     const radioList = this.lists.filter(x => x.title === title);
     const selectedItems = radioList[0].items.filter(x => x.title === event.detail.value);
     const price = parseFloat(selectedItems[0].price);
@@ -120,7 +112,7 @@ export class VariationsPage implements OnInit {
     if (this.newItem) {
       role = 'newCustom';
     }
-    console.log(this.haveSize, '------------------', this.cart);
+  // console.log(this.haveSize, '------------------', this.cart);
     if (this.haveSize === false) {
       const regularItem =
       {

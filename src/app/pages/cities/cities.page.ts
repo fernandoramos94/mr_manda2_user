@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -33,7 +25,7 @@ export class CitiesPage implements OnInit {
 
   getCities() {
     // this.api.getCities().then((data) => {
-    //   console.log(data);
+    // // console.log(data);
     //   this.dummy = [];
     //   if (data && data.length) {
     //     data.forEach(element => {
@@ -44,9 +36,8 @@ export class CitiesPage implements OnInit {
     //     });
     //   }
     // }).catch(error => {
-    //   console.log(error);
-    //   this.util.errorToast(this.util.translate('Something went wrong'));
-    //   this.dummy = [];
+    // // console.log(error);
+    //   this.util.errorToast('Algo ha ido mal');    //   this.dummy = [];
     // });
   }
 
@@ -54,9 +45,9 @@ export class CitiesPage implements OnInit {
   }
 
   goNext() {
-    console.log('next', this.selectedCity);
+  // console.log('next', this.selectedCity);
     const data = this.cities.filter(x => x.id === this.selectedCity);
-    console.log(data);
+  // console.log(data);
     localStorage.setItem('selectedCity', JSON.stringify(data[0]));
     this.util.publishLocation();
     this.navCtrl.navigateRoot(['/tabs']);

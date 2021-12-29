@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -69,9 +61,9 @@ export class RegisterPage implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'ok') {
-        console.log('login');
+      // console.log('login');
         const param = {
           first_name: this.login.first_name,
           last_name: this.login.last_name,
@@ -92,11 +84,11 @@ export class RegisterPage implements OnInit {
           stripe_key: ''
         };
 
-        console.log('param', param);
+      // console.log('param', param);
         this.isLogin = true;
         this.api.post('users/registerUser', param).then((data: any) => {
           this.isLogin = false;
-          console.log(data);
+        // console.log(data);
           if (data && data.status === 200) {
             this.util.userInfo = data.data;
             localStorage.setItem('uid', data.data.id);
@@ -107,9 +99,9 @@ export class RegisterPage implements OnInit {
                 fcm_token: fcm
               };
               this.api.post('users/edit_profile', updateParam).then((data: any) => {
-                console.log('user info=>', data);
+              // console.log('user info=>', data);
               }, error => {
-                console.log(error);
+              // console.log(error);
               });
             }
             this.sendVerification(this.login.email, this.api.baseUrl + 'users/verify?uid=' + data.data.id);
@@ -118,13 +110,11 @@ export class RegisterPage implements OnInit {
           } else if (data && data.status === 500) {
             this.util.errorToast(data.data.message);
           } else {
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          }
+            this.util.errorToast('Algo ha ido mal');          }
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.isLogin = false;
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       }
     });
     modal.present();
@@ -140,12 +130,12 @@ export class RegisterPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Enviar',
           handler: () => {
-            console.log('Confirm Okay');
+          // console.log('Confirm Okay');
             this.openModal();
           }
         }
@@ -157,10 +147,10 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
   onLogin(form: NgForm) {
-    console.log('form', this.login, this.ccCode);
-    console.log(this.util.twillo);
+  // console.log('form', this.login, this.ccCode);
+  // console.log(this.util.twillo);
     this.submitted = true;
-    console.log(this.login.check);
+  // console.log(this.login.check);
     if (form.valid) {
       if (!this.login.check) {
         this.util.showToast('Por favor acepta nuestros términos y condiciones', 'dark', 'bottom');
@@ -172,7 +162,7 @@ export class RegisterPage implements OnInit {
         return false;
       }
       if (this.util.twillo === '1') {
-        console.log('open model=>>>');
+      // console.log('open model=>>>');
         const param = {
           email: this.login.email,
           phone: this.login.mobile
@@ -180,27 +170,24 @@ export class RegisterPage implements OnInit {
         this.isLogin = true;
         this.api.post('users/validatePhoneAndEmail', param).then((data: any) => {
           this.isLogin = false;
-          console.log('data', data);
+        // console.log('data', data);
           if (data && data.status === 200) {
-            console.log('all done...');
+          // console.log('all done...');
             this.presentAlertConfirm();
           } else if (data && data.status === 500) {
             this.util.errorToast(data.data.message);
           } else {
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          }
+            this.util.errorToast('Algo ha ido mal');          }
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.isLogin = false;
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        }).catch(error => {
-          console.log(error);
+          this.util.errorToast('Algo ha ido mal');        }).catch(error => {
+        // console.log(error);
           this.isLogin = false;
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
         // this.openModal();
       } else {
-        console.log('login');
+      // console.log('login');
         const param = {
           first_name: this.login.first_name,
           last_name: this.login.last_name,
@@ -221,11 +208,11 @@ export class RegisterPage implements OnInit {
           stripe_key: ''
         };
 
-        console.log('param', param);
+      // console.log('param', param);
         this.isLogin = true;
         this.api.post('users/registerUser', param).then((data: any) => {
           this.isLogin = false;
-          console.log(data);
+        // console.log(data);
           if (data && data.status === 200) {
             this.util.userInfo = data.data;
             localStorage.setItem('uid', data.data.id);
@@ -236,9 +223,9 @@ export class RegisterPage implements OnInit {
                 fcm_token: fcm
               };
               this.api.post('users/edit_profile', updateParam).then((data: any) => {
-                console.log('user info=>', data);
+              // console.log('user info=>', data);
               }, error => {
-                console.log(error);
+              // console.log(error);
               });
             }
             this.sendVerification(this.login.email, this.api.baseUrl + 'users/verify?uid=' + data.data.id);
@@ -247,13 +234,11 @@ export class RegisterPage implements OnInit {
           } else if (data && data.status === 500) {
             this.util.errorToast(data.data.message);
           } else {
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          }
+            this.util.errorToast('Algo ha ido mal');          }
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.isLogin = false;
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       }
 
 
@@ -267,9 +252,9 @@ export class RegisterPage implements OnInit {
     };
 
     this.api.post('users/sendVerificationMail', param).then((data) => {
-      console.log('mail', data);
+    // console.log('mail', data);
     }, error => {
-      console.log(error);
+    // console.log(error);
     });
   }
   back() {
@@ -277,16 +262,16 @@ export class RegisterPage implements OnInit {
   }
 
   async openCountry() {
-    console.log('open ccode');
+  // console.log('open ccode');
     const modal = await this.modalCtrl.create({
       component: SelectCountryPage,
       backdropDismiss: false,
       showBackdrop: true,
     });
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'selected') {
-        console.log('ok');
+      // console.log('ok');
         this.login.cc = '+' + data.data;
         this.ccCode = '+' + data.data;
       }
@@ -296,9 +281,9 @@ export class RegisterPage implements OnInit {
 
   open(type) {
     if (type === 'eula') {
-      this.iab.create('https://initappz.com/groceryeeaagya/eula.html');
+      this.iab.create('https://terebuscas.com');
     } else {
-      this.iab.create('https://initappz.com/groceryeeaagya/privacy.html');
+      this.iab.create('https://terebuscas.com');
     }
   }
 

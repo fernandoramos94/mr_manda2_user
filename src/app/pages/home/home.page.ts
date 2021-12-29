@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
@@ -21,7 +13,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  name: any;
   plt;
   allRest: any[] = [];
   chips: any[] = [];
@@ -62,7 +54,7 @@ export class HomePage implements OnInit {
       this.plt = 'android';
     }
     this.util.subscribeLocation().subscribe(data => {
-      console.log('changedd----->>>');
+    // console.log('changedd----->>>');
       this.dummyRest = [];
       this.allRest = [];
       this.banners = [];
@@ -73,6 +65,10 @@ export class HomePage implements OnInit {
     this.getRestaurants();
   }
 
+  getName() {
+    return this.util.userInfo && this.util.userInfo.first_name ?
+      this.util.userInfo.first_name  : '';
+  }
 
 
   getRestaurants() {
@@ -86,7 +82,7 @@ export class HomePage implements OnInit {
     this.api.post('stores/nearMe', param).then((data: any) => {
       this.dummyBanners = [];
       this.dummy = [];
-      console.log(data);
+    // console.log(data);
       if (data && data.status === 200 && data.data.length > 0) {
         this.allRest = [];
         this.dummyRest = [];
@@ -103,46 +99,54 @@ export class HomePage implements OnInit {
           this.dummyRest.push(element);
         });
         const info = [...new Set(this.allRest.map(item => item.id))];
-        console.log(info);
+      // console.log(info);
         this.getBanners(info);
-        console.log(this.allRest);
+      // console.log(this.allRest);
         this.chMod.detectChanges();
       } else {
         this.allRest = [];
         this.dummy = [];
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.dummyRest = [];
       this.dummyBanners = [];
     }).catch(error => {
-      console.log(error);
+    // console.log(error);
       this.dummyRest = [];
       this.dummyBanners = [];
     });
   }
 
+  onFocusEvent(event) {
+    this.router.navigate(['buscador', { useFocusOnSearch: true }]);
+  }
+
+  onBlurEvent(event) {
+  }
+
+
   getBanners(ids) {
-    console.log(ids);
+  // console.log(ids);
     this.api.get('banners').then((data: any) => {
-      console.log('banners-->>', data);
+    // console.log('banners-->>', data);
       this.dummyBanners = [];
       this.banners = [];
       if (data && data.status === 200 && data.data && data.data.length) {
         this.dummyBanners = [];
         this.banners = [];
         data.data.forEach(element => {
-          console.log(element);
-          console.log(element.type === '0' && ids.includes(element.value));
+        // console.log(element);
+        // console.log(element.type === '0' && ids.includes(element.value));
           if (element.type === '0' && ids.includes(element.value)) {
             this.banners.push(element);
-          } else if (element.type === '1') {
+          } else if (element.type === '0') {
             this.banners.push(element);
           }
         });
       }
     }).catch((error: any) => {
-      console.log('error=>', error);
+    // console.log('error=>', error);
     });
   }
 
@@ -160,27 +164,27 @@ export class HomePage implements OnInit {
   }
 
   addFilter(index) {
-    console.log(index);
+  // console.log(index);
     if (index === 0) {
-      console.log('rating');
+    // console.log('rating');
       this.allRest = orderBy(this.allRest, 'rating', 'desc');
     } else if (index === 1) {
-      console.log('fast');
+    // console.log('fast');
       this.allRest = orderBy(this.allRest, 'time', 'asc');
     } else if (index === 2) {
-      console.log('cost');
+    // console.log('cost');
       this.allRest = orderBy(this.allRest, 'dish', 'asc');
     } else if (index === 3) {
-      console.log('A-Z');
+    // console.log('A-Z');
       this.allRest = orderBy(this.allRest, 'name', 'asc');
     } else if (index === 4) {
-      console.log('Z-A');
+    // console.log('Z-A');
       this.allRest = orderBy(this.allRest, 'name', 'desc');
     }
   }
 
   ngOnInit() {
-    console.log('init');
+  // console.log('init');
   }
 
   async presentModal() {
@@ -188,7 +192,7 @@ export class HomePage implements OnInit {
   }
 
   openMenu(item) {
-    console.log(item);
+  // console.log(item);
     if (item.isOpen === false || item.isClosed === '0') {
       return false;
     }
@@ -215,7 +219,7 @@ export class HomePage implements OnInit {
   }
 
   onSearchChange(event) {
-    console.log(event.detail.value);
+  // console.log(event.detail.value);
     if (event.detail.value && event.detail.value !== '') {
       this.allRest = this.dummyRest.filter((ele: any) => {
         return ele.name.toLowerCase().includes(event.detail.value.toLowerCase());
@@ -227,7 +231,7 @@ export class HomePage implements OnInit {
 
   chipChange(item) {
     this.allRest = this.dummyRest;
-    console.log(item);
+  // console.log(item);
     if (item === 'Fastest Delivery') {
       this.allRest.sort((a, b) => {
         a = new Date(a.time);
@@ -260,4 +264,25 @@ export class HomePage implements OnInit {
     this.router.navigate(['pick-location']);
   }
 
+  bebidas(){
+    this.router.navigate(['bebidas']);
+  }
+  comida(){
+    this.router.navigate(['comida']);
+  }
+  conveniencia(){
+    this.router.navigate(['conveniencia']);
+  }
+  hogaryferreteria(){
+    this.router.navigate(['hogaryferreteria']);
+  }
+  cafeypan(){
+    this.router.navigate(['cafeypan']);
+  }
+  supermercado(){
+    this.router.navigate(['supermercado']);
+  }
+  salud(){
+    this.router.navigate(['salud']);
+  }
 }

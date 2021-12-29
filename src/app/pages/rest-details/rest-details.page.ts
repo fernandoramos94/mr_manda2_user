@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
@@ -53,7 +45,7 @@ export class RestDetailsPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
-      console.log('data=>', data);
+    // console.log('data=>', data);
       if (data.hasOwnProperty('id')) {
         this.id = data.id;
         this.getVenueDetails();
@@ -67,7 +59,7 @@ export class RestDetailsPage implements OnInit {
     };
 
     this.api.post('stores/getByUid', body).then((datas: any) => {
-      console.log(datas);
+    // console.log(datas);
       if (datas && datas.status === 200 && datas.data.length > 0) {
         const data = datas.data[0];
         if (data) {
@@ -91,27 +83,25 @@ export class RestDetailsPage implements OnInit {
           const format = 'HH:mm:ss';
 
           const currentTime = moment().format(format);
-          console.log(currentTime);
+        // console.log(currentTime);
           const time = moment(currentTime, format);
           const beforeTime = moment(data.open_time, format);
           const afterTime = moment(data.close_time, format);
 
           if (time.isBetween(beforeTime, afterTime)) {
-            console.log('is between');
+          // console.log('is between');
             this.isOpen = true;
           } else {
             this.isOpen = false;
-            console.log('is not between');
+          // console.log('is not between');
           }
         }
       }
     }, error => {
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    }).catch(error => {
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    }).catch(error => {
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
 }

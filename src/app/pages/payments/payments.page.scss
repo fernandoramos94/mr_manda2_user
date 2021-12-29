@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 .header {
     background: #f3f3f3;
     padding: 20px;
@@ -38,4 +30,137 @@
             font-size: 0.8rem;
         }
     }
+}
+
+.col-12, .col-3, .col-4, .col-6{
+    border-bottom: 1px solid #cccccc;
+}
+
+.col-12{
+    width: 95%;
+    margin: 5px;
+    display: inline-block;
+}
+
+.col-3{
+    width: 20%;
+    margin: 5px;
+    display: inline-block;
+}
+.col-4{
+    width: 30%;
+    margin: 5px;
+    display: inline-block;
+}
+.col-6{
+    width: 50%;
+    margin: 5px;
+    display: inline-block;
+}
+.col-9{
+    width: 70%;
+    margin: 5px;
+    display: inline-block;
+    span{
+        display: block;
+        font-size: 17px;
+        line-height: 1.5;
+        padding-left: 15px;
+    }
+}
+
+.form-control{
+    border: none;
+    
+    padding: 10px 5px;
+    width: 72%;
+    background-color: #fff;
+}
+.form-control:focus, .form-control:active{
+    border:none !important;
+    outline: none;
+}
+select{
+    width: 100% !important;
+}
+ion-icon{
+    font-size: 20px;
+    vertical-align: middle;
+}
+.btn.btn-primary {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3ecc6d;
+    border: 1px solid #ddd
+}
+
+.hidden{
+    display: none !important;
+}
+
+
+.mp{
+    padding: 5px 10px;
+}
+
+.card-saves{
+    width: 100%;
+    padding: 5px 10px;
+    background: #f3f3f3;
+    border-radius: 7px;
+    margin: 6px 0px;
+}
+.col-3{
+    img{
+        width: 50px !important;
+        border-radius: 5px;
+    }
+}
+.title-text{
+    padding: 13px 10px;
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modalContainer {
+    position: fixed; 
+    z-index: 999;
+    bottom: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalContainer .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px 0;
+    border: 1px solid lightgray;
+    border-top: 10px solid #58abb7;
+    width: 100%;
+    margin-top: 96%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.modalContainer .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 39px;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.modalContainer .close:hover,
+.modalContainer .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

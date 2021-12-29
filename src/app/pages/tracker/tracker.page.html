@@ -14,7 +14,7 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{util.translate('Tracking')}}</ion-title>
+    <ion-title>Rastrear</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +25,7 @@
       <div #map id="map" class="map"></div>
     </div>
     <div class="lower_div">
-      <ion-label class="head_lbl">{{util.translate('Order on the Way')}}</ion-label>
+      <ion-label class="head_lbl">Orden en camino</ion-label>
 
       <div class="driver_detail_div">
         <div class="back_image"
@@ -34,22 +34,21 @@
           <ion-label class="boy_name">{{dName}}</ion-label>
           <ion-label class="address">{{restAddress}}</ion-label>
           <ion-button (click)="callDriver()" size="small" fill="outline">
-            {{util.translate('Call')}}
+            Llamar
           </ion-button>
         </div>
       </div>
 
-      <ion-label class="order_detail">{{totalOrders.length}} {{util.translate('Items to deliver')}}
+      <ion-label class="order_detail">{{totalOrders.length}} Productos
         <span style="color: var(--ion-color-primary);position: absolute;right: 20px;" *ngIf="util.cside==='left'">
           {{util.currecny}} {{grandTotal}}</span>
         <span style="color: var(--ion-color-primary);position: absolute;right: 20px;"
           *ngIf="util.cside==='right'">{{grandTotal}} {{util.currecny}}</span>
       </ion-label>
-      <ion-label class="order_detail">{{util.translate('Order Status')}}<span class="order_status">{{status}}</span>
+      <ion-label class="order_detail">Estado<span class="order_status">{{status}}</span>
       </ion-label>
 
-      <ion-label class="order_detail">{{util.translate('Payment')}}<span class="order_status">{{payMethod}}</span>
-      </ion-label>
+     
 
     </div>
 

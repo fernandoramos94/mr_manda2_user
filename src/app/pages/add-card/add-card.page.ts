@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { ApisService } from 'src/app/services/apis.service';
@@ -51,7 +43,7 @@ export class AddCardPage implements OnInit {
     const year = this.date.split('-')[0];
     const month = this.date.split('-')[1];
     if (this.util.userInfo && this.util.userInfo.stripe_key && this.util.userInfo.stripe_key !== '') {
-      console.log('add new card');
+    // console.log('add new card');
       const param = {
         'card[number]': this.cnumber,
         'card[exp_month]': month,
@@ -60,7 +52,7 @@ export class AddCardPage implements OnInit {
       };
       this.util.show();
       this.api.externalPost('https://api.stripe.com/v1/tokens', param, this.util.stripe).subscribe((data: any) => {
-        console.log(data);
+      // console.log(data);
         if (data && data.id) {
           // this.token = data.id;
           const newCardInfo = {
@@ -68,26 +60,25 @@ export class AddCardPage implements OnInit {
           };
           this.api.externalPost('https://api.stripe.com/v1/customers/' + this.util.userInfo.stripe_key + '/sources',
             newCardInfo, this.util.stripe).subscribe((data) => {
-              console.log('new card addedd', data);
+            // console.log('new card addedd', data);
               this.util.hide();
               this.back();
             }, error => {
-              console.log('error in new card', error);
+            // console.log('error in new card', error);
               this.util.hide();
             });
         } else {
           this.util.hide();
         }
       }, (error: any) => {
-        console.log(error);
+      // console.log(error);
         this.util.hide();
-        console.log();
+      // console.log();
         if (error && error.error && error.error.error && error.error.error.message) {
           this.util.errorToast(error.error.error.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
     } else {
       const param = {
         'card[number]': this.cnumber,
@@ -97,7 +88,7 @@ export class AddCardPage implements OnInit {
       };
       this.util.show();
       this.api.externalPost('https://api.stripe.com/v1/tokens', param, this.util.stripe).subscribe((data: any) => {
-        console.log(data);
+      // console.log(data);
         if (data && data.id) {
           // this.token = data.id;
           const customer = {
@@ -106,7 +97,7 @@ export class AddCardPage implements OnInit {
             email: this.email
           };
           this.api.externalPost('https://api.stripe.com/v1/customers', customer, this.util.stripe).subscribe((customer: any) => {
-            console.log(customer);
+          // console.log(customer);
             this.util.hide();
             if (customer && customer.id) {
               // this.cid = customer.id;
@@ -118,26 +109,24 @@ export class AddCardPage implements OnInit {
             }
           }, error => {
             this.util.hide();
-            console.log();
+          // console.log();
             if (error && error.error && error.error.error && error.error.error.message) {
               this.util.showErrorAlert(error.error.error.message);
               return false;
             }
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          });
+            this.util.errorToast('Algo ha ido mal');          });
         } else {
           this.util.hide();
         }
       }, (error: any) => {
-        console.log(error);
+      // console.log(error);
         this.util.hide();
-        console.log();
+      // console.log();
         if (error && error.error && error.error.error && error.error.error.message) {
           this.util.showErrorAlert(error.error.error.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
     }
   }
 
@@ -145,12 +134,12 @@ export class AddCardPage implements OnInit {
     this.util.show(this.util.translate('updating...'));
     this.api.post('users/edit_profile', param).then((data: any) => {
       this.util.hide();
-      console.log(data);
+    // console.log(data);
       const getParam = {
         id: localStorage.getItem('uid')
       };
       this.api.post('users/getById', getParam).then((data: any) => {
-        console.log('user info=>', data);
+      // console.log('user info=>', data);
         if (data && data.status === 200 && data.data && data.data.length) {
           this.util.userInfo = data.data[0];
           this.navCtrl.back();
@@ -158,13 +147,12 @@ export class AddCardPage implements OnInit {
           this.navCtrl.back();
         }
       }, error => {
-        console.log(error);
+      // console.log(error);
       });
     }, error => {
       this.util.hide();
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   getMaxDate(): string {

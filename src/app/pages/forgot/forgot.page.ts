@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
@@ -57,7 +49,7 @@ export class ForgotPage implements OnInit {
   }
 
   sendOTP() {
-    console.log(this.email, ';sendOTPDriver');
+  // console.log(this.email, ';sendOTPDriver');
     if (!this.email) {
       this.util.showToast(this.util.translate('email is required'), 'dark', 'bottom');
       return false;
@@ -72,7 +64,7 @@ export class ForgotPage implements OnInit {
       email: this.email
     };
     this.api.post('users/sendOTP', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.loggedIn = false;
       if (data && data.status === 200) {
         this.id = data.data.id;
@@ -83,14 +75,12 @@ export class ForgotPage implements OnInit {
           this.util.errorToast(data.data.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-        return false;
+        this.util.errorToast('Algo ha ido mal');        return false;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   verifyOTP() {
@@ -105,7 +95,7 @@ export class ForgotPage implements OnInit {
       otp: this.otp
     };
     this.api.post('users/verifyOTP', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.loggedIn = false;
       if (data && data.status === 200) {
         this.loggedIn = false;
@@ -115,18 +105,16 @@ export class ForgotPage implements OnInit {
           this.util.errorToast(data.data.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-        return false;
+        this.util.errorToast('Algo ha ido mal');        return false;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   sendEmail() {
-    console.log('pwddd0<<<<<<', this.password);
+  // console.log('pwddd0<<<<<<', this.password);
     if (!this.password || !this.repass || this.password === '' || this.repass === '') {
       this.util.errorToast(this.util.translate('All Field are required'));
       return false;
@@ -137,7 +125,7 @@ export class ForgotPage implements OnInit {
     };
     this.loggedIn = true;
     this.api.post('users/update_password', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.loggedIn = false;
       if (data && data.status === 200) {
         this.loggedIn = false;
@@ -148,18 +136,16 @@ export class ForgotPage implements OnInit {
           this.util.errorToast(data.data.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-        return false;
+        this.util.errorToast('Algo ha ido mal');        return false;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   resetPasswordWithPhone() {
-    console.log('pwddd0<<<<<<', this.password);
+  // console.log('pwddd0<<<<<<', this.password);
     if (!this.password || !this.repass || this.password === '' || this.repass === '') {
       this.util.errorToast(this.util.translate('All Field are required'));
       return false;
@@ -170,7 +156,7 @@ export class ForgotPage implements OnInit {
     };
     this.loggedIn = true;
     this.api.post('users/resetPasswordWithPhone', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.loggedIn = false;
       if (data && data.status === 200) {
         this.loggedIn = false;
@@ -181,14 +167,12 @@ export class ForgotPage implements OnInit {
           this.util.errorToast(data.data.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-        return false;
+        this.util.errorToast('Algo ha ido mal');        return false;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   back() {
@@ -203,16 +187,16 @@ export class ForgotPage implements OnInit {
   }
 
   async openCountry() {
-    console.log('open ccode');
+  // console.log('open ccode');
     const modal = await this.modalController.create({
       component: SelectCountryPage,
       backdropDismiss: false,
       showBackdrop: true,
     });
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'selected') {
-        console.log('ok');
+      // console.log('ok');
         this.cc = '+' + data.data;
         this.ccCode = '+' + data.data;
       }
@@ -227,24 +211,21 @@ export class ForgotPage implements OnInit {
     this.loggedIn = true;
     this.api.post('users/validatePhoneForReset', param).then((data: any) => {
       this.loggedIn = false;
-      console.log('data', data);
+    // console.log('data', data);
       if (data && data.status === 200) {
-        console.log('all done...');
+      // console.log('all done...');
         this.presentAlertConfirm();
       } else if (data && data.status === 500) {
         this.util.errorToast(data.data.message);
       } else {
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      }
+        this.util.errorToast('Algo ha ido mal');      }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    }).catch(error => {
-      console.log(error);
+      this.util.errorToast('Algo ha ido mal');    }).catch(error => {
+    // console.log(error);
       this.loggedIn = false;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   async presentAlertConfirm() {
@@ -257,12 +238,12 @@ export class ForgotPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Send',
           handler: () => {
-            console.log('Confirm Okay');
+          // console.log('Confirm Okay');
             this.openModal();
           }
         }
@@ -279,9 +260,9 @@ export class ForgotPage implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'ok') {
-        console.log('verification done...');
+      // console.log('verification done...');
         this.div_type = 3;
       }
     });

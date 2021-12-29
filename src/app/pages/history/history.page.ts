@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -37,7 +29,7 @@ export class HistoryPage implements OnInit {
   }
 
   doRefresh(event) {
-    console.log(event);
+  // console.log(event);
     this.getMyOrders(event, true);
   }
 
@@ -47,7 +39,7 @@ export class HistoryPage implements OnInit {
     };
     this.api.post('orders/getByUid', param).then((data: any) => {
       this.dummy = [];
-      console.log(data);
+    // console.log(data);
       if (data && data.status === 200 && data.data.length) {
         this.haveItems = true;
         data.data.forEach(element => {
@@ -63,14 +55,12 @@ export class HistoryPage implements OnInit {
       }
 
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.dummy = [];
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    }).catch(error => {
-      console.log(error);
+      this.util.errorToast('Algo ha ido mal');    }).catch(error => {
+    // console.log(error);
       this.dummy = [];
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   getCart() {

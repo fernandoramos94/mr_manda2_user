@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-label>Cancelar</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Programar Pedido</ion-title>
+    <ion-buttons slot="end" *ngIf="time !== null && day !== null">
+      <ion-button (click)="closeModal(true)">
+        <ion-label>Aceptar</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="section-title n-bt">
+    <div class="icon-wrapper">
+      <img src="/assets/pin.png" class="icon" alt="Icon">
+    </div>
+    <div class="info">
+      <div class="subtitle">Dirección de entrega</div>
+      <div class="title">{{ cart.deliveryAddress.address }}</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="icon-wrapper">
+      <img src="/assets/pin.png" class="icon" alt="Icon">
+    </div>
+    <div class="info">
+      <div class="title">Elige el día y la hora de entrega</div>
+    </div>
+  </div>
+
+  <div class="select-days">
+    <ul class="list">
+      <ng-container *ngFor="let item of days" >
+        <li class="item{{ item.index === day.index ? ' active' : '' }}" (click)="selectItem(item)">
+          <div class="info">
+            <div class="text s-bold">{{ item.day }}</div>
+            <div class="text">{{ item.month }}</div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <ion-list class="c-fnl-mb">
+    <ion-radio-group [(ngModel)]="time">
+      <ion-item *ngFor="let item of filterHours()">
+        <ion-radio *ngIf="item.value" slot="start" mode="md" [value]="item"></ion-radio>
+        <ion-label *ngIf="item.value" class="use-bold">{{item.name}}</ion-label>
+        
+        <!-- <ion-badge color="success">{{item.value}}</ion-badge> -->
+      </ion-item>
+      <ion-item *ngIf="!filterHours().length">
+        <ion-label class="use-bold ion-text-center">No hay disponibilidad</ion-label>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

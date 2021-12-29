@@ -1,76 +1,151 @@
-<!-- 
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
- -->
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="util.back()">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Generar tu pedido</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="back()">
+                <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Generar tu pedido</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="billing">
-    <div class="singleRow">
-      <ion-label class="headerTitle">Total productos</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.totalPrice}}</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.totalPrice}} {{util.currecny}}</ion-label>
+    <div class="billing">
+        <div class="singleRow">
+            <ion-label class="headerTitle">Total productos</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.totalPrice}}</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.totalPrice}} {{util.currecny}}</ion-label>
+        </div>
+        <div class="singleRow" *ngIf="cart.discount && cart.coupon">
+            <ion-label class="headerTitle">Cupón</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='left'"> - {{util.currecny}} {{cart.discount}}</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='right'"> - {{cart.discount}} {{util.currecny}}</ion-label>
+        </div>
+
+        <div class="singleRow">
+            <ion-label class="headerTitle">Precio por envío</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.deliveryPrice}}</ion-label>
+            <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.deliveryPrice}} {{util.currecny}}</ion-label>
+        </div>
+
+        <div class="singleRow">
+            <ion-label class="headerTotal boldClass">Total</ion-label>
+            <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.grandTotal}}
+            </ion-label>
+            <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='right'"> {{cart.grandTotal}} {{util.currecny}}
+            </ion-label>
+        </div>
     </div>
-    <div class="singleRow" *ngIf="cart.discount && cart.coupon">
-      <ion-label class="headerTitle">Cupón</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='left'"> - {{util.currecny}} {{cart.discount}}</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='right'"> - {{cart.discount}} {{util.currecny}}</ion-label>
-    </div>
-    <div class="singleRow">
-      <ion-label class="headerTitle">{{util.translate('Taxes & Charges')}} ({{cart.flatTax}} %) </ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.orderTax}}</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.orderTax}} {{util.currecny}}</ion-label>
-    </div>
-    <div class="singleRow">
-      <ion-label class="headerTitle">Precio por envío</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.deliveryPrice}}</ion-label>
-      <ion-label class="price" *ngIf="util.cside ==='right'"> {{cart.deliveryPrice}} {{util.currecny}}</ion-label>
+    <div class="header">
+        <ion-label class="title">Selecciona el método de pago</ion-label>
     </div>
 
-    <div class="singleRow">
-      <ion-label class="headerTotal boldClass">Total</ion-label>
-      <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.grandTotal}}
-      </ion-label>
-      <ion-label class="priceTotal boldClass" *ngIf="util.cside ==='right'"> {{cart.grandTotal}} {{util.currecny}}
-      </ion-label>
+
+    <div class="mp">
+        <div class="row row-1">
+            <label for="" class="title-text">Disponibles</label>
+            <div class="card-saves" *ngFor="let cardSave of getCard" (click)="auto(cardSave)">
+                <div class="col-3" style="border: none !important; text-align: center;">
+                    <img src="../../../assets/master.png" alt="" srcset="" *ngIf="cardSave.type == 1">
+                    <img src="../../../assets/visa.png" alt="" srcset="" *ngIf="cardSave.type == 2">
+                    <img src="../../../assets/americanexpress.png" alt="" srcset="" *ngIf="cardSave.type == 3">
+                </div>
+                <div class="col-9">
+                    <span>{{card.name}}</span>
+                    <span>{{cardHide(cardSave.number)}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-1">
+            <label for="" class="title-text">Agregar tarjeta</label>
+
+            <div class="card-saves" (click)="selectCard(1)">
+                <div class="col-3" style="border: none !important; text-align: center;">
+                    <img src="../../../assets/master.png" alt="" srcset="">
+                </div>
+                <div class="col-9" style="vertical-align: text-bottom;">
+                    <span>MasterCard</span>
+                </div>
+            </div>
+            <div class="card-saves" (click)="selectCard(2)">
+                <div class="col-3" style="border: none !important; text-align: center;">
+                    <img src="../../../assets/visa.png" alt="" srcset="">
+                </div>
+                <div class="col-9" style="vertical-align: text-bottom;">
+                    <span>Visa</span>
+                </div>
+            </div>
+            <div class="card-saves" (click)="selectCard(3)">
+                <div class="col-3" style="border: none !important; text-align: center;">
+                    <img src="../../../assets/americanexpress.png" alt="" srcset="">
+                </div>
+                <div class="col-9" style="vertical-align: text-bottom;">
+                    <span>American Express</span>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="header">
-    <ion-label class="title">Método de pago</ion-label>
-  </div>
+
+    <div style="margin: 5px 8px;">
+        <div id="paypalButton"></div>
+    </div>
+    <div id="myModal" class="modalContainer" *ngIf="card.type == '1' || card.type == '2'">
+        <div class="modal-content">
+            <span class="close" (click)="card.type=''">×</span> <h2></h2>
+            <form id="form-checkout">
+                <div class="col-12">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="cardholderName" required id="form-checkout__cardholderName"
+                        class="form-control" [(ngModel)]="card.name" />
+                </div>
+                <div class="col-12 hidden">
+                    <ion-icon name="id-card-outline"></ion-icon>
+                    <input type="text" name="identificationNumber" required="true"
+                        id="form-checkout__identificationNumber" class="form-control"
+                        [(ngModel)]="card.identification" />
+                </div>
+                <div class="col-12">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="email" name="cardholderEmail" required id="form-checkout__cardholderEmail"
+                        class="form-control" [(ngModel)]="card.email" />
+                </div>
+                <div class="col-12">
+                    <ion-icon name="card-outline"></ion-icon> <input type="text" required name="cardNumber"
+                        id="form-checkout__cardNumber" class="form-control" [(ngModel)]="card.card_number" />
+                </div>
+                <div class="col-3">
+                    <ion-icon name="calendar-clear-outline"></ion-icon>
+                    <input type="text" name="cardExpirationMonth" required id="form-checkout__cardExpirationMonth"
+                        class="form-control" [(ngModel)]="card.month" />
+                </div>
+                <div class="col-3">
+                    <ion-icon name="calendar-clear-outline"></ion-icon>
+                    <input type="text" name="cardExpirationYear" required id="form-checkout__cardExpirationYear"
+                        class="form-control" [(ngModel)]="card.year" />
+                </div>
+                <div class="col-6">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="text" name="securityCode" required id="form-checkout__securityCode"
+                        class="form-control" />
+                </div>
+                <div class="col-12 hidden">
+                    <select name="installments" id="form-checkout__installments" class="form-control"></select>
+                </div>
+                <div class="hidden">
+                    <select name="issuer" id="form-checkout__issuer"></select>
+                    <select name="identificationType" id="form-checkout__identificationType"></select>
+                    <progress value="0" class="progress-bar">Cargando...</progress>
+                </div>
 
 
-  <ion-item (click)="createOrder()" lines="none" *ngIf="havePayment && haveCOD">
-    <ion-thumbnail slot="start">
-      <img src="assets/imgs/cod.png" />
-    </ion-thumbnail>
-    <ion-label> Pagar en efectivo </ion-label>
-    <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
-  </ion-item>
+                <div class="col-12">
+                    <button type="submit" id="form-checkout__submit" class="btn btn-primary">Pagar</button>
+                </div>
 
-  <ion-item (click)="paypalPayment()" lines="none" *ngIf="havePayment && havePayPal">
-    <ion-thumbnail slot="start">
-      <img src="assets/imgs/paypal.png" />
-    </ion-thumbnail>
-    <ion-label> Pagar en linea </ion-label>
-    <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
-  </ion-item>
-
-
+            </form>
+        </div>
+    </div>
 
 
 

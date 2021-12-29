@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
@@ -53,7 +45,7 @@ export class TrackerPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
-      console.log('data=>', data);
+    // console.log('data=>', data);
       if (data.hasOwnProperty('id')) {
         this.id = data.id;
         this.getOrder();
@@ -69,7 +61,7 @@ export class TrackerPage implements OnInit {
       id: this.id
     };
     this.api.post('orders/getById', param).then((datas: any) => {
-      console.log(datas);
+    // console.log(datas);
       if (datas && datas.status === 200 && datas.data.length) {
         const data = datas.data[0];
         this.totalOrders = JSON.parse(data.orders);
@@ -80,7 +72,7 @@ export class TrackerPage implements OnInit {
 
         if (data && data.address) {
           const add = JSON.parse(data.address);
-          console.log(add);
+        // console.log(add);
           this.myLat = add.lat;
           this.myLng = add.lng;
         }
@@ -94,10 +86,10 @@ export class TrackerPage implements OnInit {
         this.util.back();
       }
     }, error => {
-      console.log('error in orders', error);
+    // console.log('error in orders', error);
       this.util.errorToast('Something went wrong');
     }).catch(error => {
-      console.log('error in order', error);
+    // console.log('error in order', error);
       this.util.errorToast('Something went wrong');
     });
 
@@ -107,10 +99,10 @@ export class TrackerPage implements OnInit {
       id: this.dId
     };
     this.api.post('drivers/getById', param).then((data: any) => {
-      console.log('driver info--->>', data);
+    // console.log('driver info--->>', data);
       if (data && data.status === 200 && data.data.length) {
         const info = data.data[0];
-        console.log('---->>>>>', info);
+      // console.log('---->>>>>', info);
         this.dName = info.first_name + ' ' + info.last_name;
         this.dCover = info.cover;
         this.phone = info.mobile;
@@ -119,10 +111,10 @@ export class TrackerPage implements OnInit {
         this.loadMap(parseFloat(this.myLat), parseFloat(this.myLng), parseFloat(this.driverLat), parseFloat(this.driverLng));
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     }).catch((error) => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     });
   }
@@ -132,10 +124,10 @@ export class TrackerPage implements OnInit {
       id: this.dId
     };
     this.api.post('drivers/getById', param).then((data: any) => {
-      console.log('driver info--->>', data);
+    // console.log('driver info--->>', data);
       if (data && data.status === 200 && data.data.length) {
         const info = data.data[0];
-        console.log('---->>>>>', info);
+      // console.log('---->>>>>', info);
         this.dName = info.first_name + ' ' + info.last_name;
         this.dCover = info.cover;
         this.phone = info.mobile;
@@ -146,10 +138,10 @@ export class TrackerPage implements OnInit {
         marker.setPosition(latlng);
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     }).catch((error) => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     });
 
@@ -157,15 +149,19 @@ export class TrackerPage implements OnInit {
 
   loadMap(latOri, lngOri, latDest, lngDest) {
 
-    const directionsService = new google.maps.DirectionsService;
-    let directionsDisplay = new google.maps.DirectionsRenderer;
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay = new google.maps.DirectionsRenderer();
-    const bounds = new google.maps.LatLngBounds;
+    var bounds = new google.maps.LatLngBounds;
 
-    const origin1 = { lat: parseFloat(latOri), lng: parseFloat(lngOri) };
-    const destinationA = { lat: latDest, lng: lngDest };
+    var origin1 = { lat: parseFloat(latOri), lng: parseFloat(lngOri) };
+    var destinationA = { lat: latDest, lng: lngDest };
 
-    const maps = new google.maps.Map(this.mapElement.nativeElement, {
+    var destinationIcon = 'https://chart.googleapis.com/chart?' +
+      'chst=d_map_pin_letter&chld=D|FF0000|000000';
+    var originIcon = 'https://chart.googleapis.com/chart?' +
+      'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+    var map = new google.maps.Map(this.mapElement.nativeElement, {
       center: { lat: latOri, lng: lngOri },
       disableDefaultUI: true,
       zoom: 100
@@ -174,40 +170,35 @@ export class TrackerPage implements OnInit {
     const custPos = new google.maps.LatLng(latOri, lngOri);
     const restPos = new google.maps.LatLng(latDest, lngDest);
 
-    const logo = {
+    const icon = {
       url: 'assets/pin.png',
       scaledSize: new google.maps.Size(50, 50), // scaled size
       origin: new google.maps.Point(0, 0), // origin
       anchor: new google.maps.Point(0, 0) // anchor
     };
-    const marker = new google.maps.Marker({
-      map: maps,
+    var marker = new google.maps.Marker({
+      map: map,
       position: custPos,
       animation: google.maps.Animation.DROP,
-      icon: logo,
+      icon: icon,
     });
-    const markerCust = new google.maps.Marker({
-      map: maps,
-      position: restPos,
-      animation: google.maps.Animation.DROP,
-      icon: logo,
-    });
-    marker.setMap(maps);
-    markerCust.setMap(maps);
 
-    directionsDisplay.setMap(maps);
+    marker.setMap(map);
+   /// markerCust.setMap(map);
+
+   // directionsDisplay.setMap(map);
     // directionsDisplay.setOptions({ suppressMarkers: true });
     directionsDisplay.setOptions({
       polylineOptions: {
         strokeWeight: 4,
         strokeOpacity: 1,
-        strokeColor: '#ff384c'
+        strokeColor: 'red'
       },
       suppressMarkers: true
     });
-    const geocoder = new google.maps.Geocoder;
+    var geocoder = new google.maps.Geocoder;
 
-    const service = new google.maps.DistanceMatrixService;
+    var service = new google.maps.DistanceMatrixService;
 
     service.getDistanceMatrix({
       origins: [origin1],
@@ -220,12 +211,22 @@ export class TrackerPage implements OnInit {
       if (status !== 'OK') {
         alert('Error was: ' + status);
       } else {
-        const originList = response.originAddresses;
-        const destinationList = response.destinationAddresses;
-        const showGeocodedAddressOnMap = function (asDestination) {
+        var originList = response.originAddresses;
+        var destinationList = response.destinationAddresses;
+        var outputDiv = document.getElementById('output');
+        // outputDiv.innerHTML = '';
+        // deleteMarkers(markersArray);
+
+        var showGeocodedAddressOnMap = function (asDestination) {
+          var icon = asDestination ? destinationIcon : originIcon;
           return function (results, status) {
             if (status === 'OK') {
-              maps.fitBounds(bounds.extend(results[0].geometry.location));
+              map.fitBounds(bounds.extend(results[0].geometry.location));
+              // markersArray.push(new google.maps.Marker({
+              //   map: map,
+              //   position: results[0].geometry.location,
+              //   icon: icon
+              // }));
             } else {
               alert('Geocode was not successful due to: ' + status);
             }
@@ -246,7 +247,7 @@ export class TrackerPage implements OnInit {
 
 
         for (let i = 0; i < originList.length; i++) {
-          const results = response.rows[i].elements;
+          let results = response.rows[i].elements;
           geocoder.geocode({ 'address': originList[i] },
             showGeocodedAddressOnMap(false));
           for (let j = 0; j < results.length; j++) {
@@ -257,11 +258,11 @@ export class TrackerPage implements OnInit {
       }
     });
     this.interval = setInterval(() => {
-      this.changeMarkerPosition(marker, maps);
-    }, 12000);
+      this.changeMarkerPosition(marker, map);
+    }, 1000);
   }
   ionViewDidLeave() {
-    console.log('leaae');
+  // console.log('leaae');
     clearInterval(this.interval);
   }
 }

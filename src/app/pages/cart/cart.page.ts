@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -36,7 +28,7 @@ export class CartPage implements OnInit {
   ) {
     this.util.getCouponObservable().subscribe(data => {
       if (data) {
-        console.log('------------->>', data);
+      // console.log('------------->>', data);
       }
     });
     this.cart.orderNotes = '';
@@ -62,11 +54,11 @@ export class CartPage implements OnInit {
       id: this.cart.cart[0].restId
     };
     this.api.post('stores/getByUid', body).then((datas: any) => {
-      console.log(datas);
+    // console.log(datas);
       if (datas && datas.status === 200 && datas.data.length > 0) {
         const data = datas.data[0];
         this.cart.cartStoreInfo = data;
-        console.log('data-->>');
+      // console.log('data-->>');
         this.name = data.name;
         this.descritions = data.descritions;
         this.cover = data.cover;
@@ -75,12 +67,10 @@ export class CartPage implements OnInit {
         this.totalRatting = data.totalRatting;
       }
     }, error => {
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    }).catch(error => {
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    }).catch(error => {
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   getCart() {
@@ -88,7 +78,7 @@ export class CartPage implements OnInit {
   }
 
   addQ(index) {
-    console.log(this.cart.cart[index]);
+  // console.log(this.cart.cart[index]);
     this.cart.cart[index].quantiy = this.cart.cart[index].quantiy + 1;
     this.cart.calcuate();
   }
@@ -158,7 +148,7 @@ export class CartPage implements OnInit {
   }
 
   removeQAddos(i, j) {
-    console.log(this.cart.cart[i].selectedItem[j]);
+  // console.log(this.cart.cart[i].selectedItem[j]);
     if (this.cart.cart[i].selectedItem[j].total !== 0) {
       this.cart.cart[i].selectedItem[j].total = this.cart.cart[i].selectedItem[j].total - 1;
       if (this.cart.cart[i].selectedItem[j].total === 0) {
@@ -168,7 +158,7 @@ export class CartPage implements OnInit {
             newCart.push(element);
           }
         });
-        console.log('newCart', newCart);
+      // console.log('newCart', newCart);
         this.cart.cart[i].selectedItem = newCart;
         this.cart.cart[i].quantiy = newCart.length;
         if (this.cart.cart[i].quantiy === 0) {
@@ -180,7 +170,7 @@ export class CartPage implements OnInit {
   }
 
   addQAddos(i, j) {
-    console.log(this.cart.cart[i].selectedItem[j]);
+  // console.log(this.cart.cart[i].selectedItem[j]);
     this.cart.cart[i].selectedItem[j].total = this.cart.cart[i].selectedItem[j].total + 1;
     this.cart.calcuate();
   }

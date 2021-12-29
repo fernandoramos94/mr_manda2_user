@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -104,13 +96,51 @@ export class ApisService {
           .set('Basic', `${environment.authToken}`)
       };
       const param = this.JSON_to_URLEncoded(body);
-      console.log(param);
       this.http.post(this.baseUrl + url, param, header).subscribe((data) => {
         resolve(data);
       }, error => {
         resolve(error);
       });
-      // return this.http.post(this.baseUrl + url, param, header);
+    });
+  }
+
+  public getToken(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+
+      const auth = "Basic "+btoa(environment.client_ID+':'+environment.secret_ID);
+      const header = {
+        headers: new HttpHeaders()
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', auth)
+      };
+      const body = 'grant_type=client_credentials';
+      const link = 'https://api-m.sandbox.paypal.com/v1/oauth2/token';
+      this.http.post(link, body, header).subscribe((data) => {
+        resolve(data);
+      }, error => {
+        resolve(error);
+      });
+    });
+  }
+
+  public createOrder(order, token): Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+
+      const auth = "Bearer "+ token;
+      const header = {
+        headers: new HttpHeaders()
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .set('Authorization', auth)
+      };
+      const body = JSON.stringify(order);
+      const link = 'https://api-m.sandbox.paypal.com/v2/checkout/orders';
+      this.http.post(link, body, header).subscribe((data) => {
+        resolve(data);
+      }, error => {
+        resolve(error);
+      });
     });
   }
 
@@ -146,7 +176,7 @@ export class ApisService {
   }
 
   nativePost(url, post) {
-    console.log(this.baseUrl + url, post);
+  // console.log(this.baseUrl + url, post);
     return this.nativeHttp.post(this.baseUrl + url, post, {
       Basic: `${environment.authToken}`
     });
@@ -169,7 +199,7 @@ export class ApisService {
         .set('Authorization', `Bearer ${key}`)
     };
     const order = this.JSON_to_URLEncoded(body);
-    console.log(order)
+  // console.log(order)
     return this.http.post(url, order, header);
   }
 }

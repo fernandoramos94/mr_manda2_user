@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, IonContent } from '@ionic/angular';
@@ -36,7 +28,7 @@ export class InboxPage implements OnInit {
     public util: UtilService
   ) {
     this.route.queryParams.subscribe((data: any) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.id && data.name) {
         this.uid = data.uid;
         this.id = data.id;
@@ -44,7 +36,7 @@ export class InboxPage implements OnInit {
         this.name = data.name;
         this.getChats();
         this.interval = setInterval(() => {
-          console.log('calling in interval');
+        // console.log('calling in interval');
           this.getChats();
         }, 12000);
       } else {
@@ -54,7 +46,7 @@ export class InboxPage implements OnInit {
   }
 
   ionViewDidLeave() {
-    console.log('leaae');
+  // console.log('leaae');
     clearInterval(this.interval);
   }
   // ScrollToBottom() {
@@ -70,7 +62,7 @@ export class InboxPage implements OnInit {
       oid: this.id
     };
     this.api.post('chats/getById', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.loaded = true;
       this.yourMessage = true;
       if (data && data.status === 200) {
@@ -78,11 +70,10 @@ export class InboxPage implements OnInit {
         this.myContent.scrollToBottom(300);
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.loaded = true;
       this.yourMessage = true;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   back() {
@@ -91,7 +82,7 @@ export class InboxPage implements OnInit {
 
   sendMessage() {
     // store to opponent
-    console.log(this.msg);
+  // console.log(this.msg);
     if (!this.msg || this.msg === '') {
       return false;
     }
@@ -109,17 +100,16 @@ export class InboxPage implements OnInit {
     this.myContent.scrollToBottom(300);
     this.yourMessage = false;
     this.api.post('chats/save', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.status === 200) {
         this.getChats();
       } else {
         this.yourMessage = true;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.yourMessage = true;
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
 }

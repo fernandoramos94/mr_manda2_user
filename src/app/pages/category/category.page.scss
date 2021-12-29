@@ -1,13 +1,5 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
-ion-fab-button {
+   //
+   ion-fab-button {
     --border-radius: 10px;
     --padding: 10px;
     width: 80px;
@@ -22,6 +14,36 @@ ion-toolbar {
         font-weight: bold;
     }
 }
+
+.div_searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+
+    .search_bar {
+        padding: 0px;
+        width: 100%;
+    }
+}
+
+.wrapper-search {
+    margin-bottom: 30px;
+  
+    .search {
+      position: relative;
+      border: 0;
+      height: 40px;
+      border-radius: 3px;
+      padding-left: 15px;
+      box-shadow: 0 0 0 .15rem rgba(0, 0, 0, .05);
+      width: 100%;
+    }
+  }
+
 .mainContent {
     .restContent {
         width: 100%;
@@ -122,7 +144,7 @@ ion-toolbar {
                         margin-left: 20px;
                         .heading_lbl {
                             // font-size: 1rem;
-                            font-size: 14px;
+                            font-size: 13px;
                             display: block;
                             text-align: left;
                         }
@@ -131,8 +153,9 @@ ion-toolbar {
                             font-size: 10px;
                         }
                         .small_lbl {
-                            font-size: 8px;
-                            color: lightgray;
+                            margin-top: 8px;
+                            font-size: 12px;
+                            color: gray;
                             display: block;
                             text-align: left;
                         }
@@ -156,7 +179,7 @@ ion-toolbar {
                         right: 15px;
                         width: 80px;
                         display: flex;
-                        background: white;
+                        background: transparent;
                         .qunitity {
                             font-weight: bold;
                             margin-top: 8px;
@@ -167,3 +190,26 @@ ion-toolbar {
         }
     }
 }
+
+
+
+.informacion{
+
+    display: flex;
+    padding: 0px 50px 0px 10px;
+
+    
+    .horario{
+        color: gray;
+        font-size: 0.8rem;
+        margin-left: 15px;
+    }
+    .horario2{
+        font-size: 0.7rem;
+        margin-left: 15px;
+        margin-top: 14px;
+    } 
+}
+
+
+

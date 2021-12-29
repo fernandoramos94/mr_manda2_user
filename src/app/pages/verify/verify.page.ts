@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { ApisService } from 'src/app/services/apis.service';
@@ -33,7 +25,7 @@ export class VerifyPage implements OnInit {
   ) {
 
     this.resendCode = false;
-    console.log('cc code', this.navParam.get('code'));
+  // console.log('cc code', this.navParam.get('code'));
     this.sendOTP();
     setTimeout(() => {
       this.resendCode = true;
@@ -42,30 +34,29 @@ export class VerifyPage implements OnInit {
 
   sendOTP() {
     this.mobile = this.navParam.get('code') + this.navParam.get('phone');
-    console.log('send on this number------<<<<<<<', this.mobile);
-    console.log(this.mobile);
+  // console.log('send on this number------<<<<<<<', this.mobile);
+  // console.log(this.mobile);
     const message = this.util.translate('Your Foodies app verification code : ');
     const param = {
       msg: message,
       to: this.mobile
     };
-    console.log(param);
+  // console.log(param);
     this.util.show();
     this.api.post('users/twilloMessage', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.id = data.data.id;
       this.util.hide();
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.hide();
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   ngOnInit() {
   }
   onOtpChange(event) {
-    console.log(event);
+  // console.log(event);
     this.userCode = event;
   }
 
@@ -73,7 +64,7 @@ export class VerifyPage implements OnInit {
     this.sendOTP();
   }
   continue() {
-    console.log(this.userCode);
+  // console.log(this.userCode);
     if (this.userCode === '' || !this.userCode) {
       this.util.errorToast(this.util.translate('Not valid code'));
       return false;
@@ -85,7 +76,7 @@ export class VerifyPage implements OnInit {
       };
       this.util.show();
       this.api.post('users/verifyOTP', param).then((data: any) => {
-        console.log(data);
+      // console.log(data);
         this.util.hide();
         if (data && data.status === 200) {
           this.modalCtrl.dismiss('', 'ok');
@@ -94,14 +85,12 @@ export class VerifyPage implements OnInit {
             this.util.errorToast(data.data.message);
             return false;
           }
-          this.util.errorToast(this.util.translate('Something went wrong'));
-          return false;
+          this.util.errorToast('Algo ha ido mal');          return false;
         }
       }, error => {
         this.util.hide();
-        console.log(error);
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+      // console.log(error);
+        this.util.errorToast('Algo ha ido mal');      });
     } else {
       this.util.errorToast(this.util.translate('Not valid code'));
       return false;

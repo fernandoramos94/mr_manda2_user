@@ -14,65 +14,53 @@
       <div class="btnss">
         <ion-icon (click)="back()" class="backIcon" color="light" slot="start" name="arrow-back-outline"></ion-icon>
       </div>
+      
     </div>
 
 
     <div class="foodsContent">
       <ion-label class="restname">{{name}}</ion-label>
-      <ion-label class="cusine">{{cusine}}</ion-label>
-      <div class="ratting">
-        <ion-icon [name]="totalRatting >= 1 ? 'star-outline':'star'" [color]="totalRatting >= 1 ? 'warning':'medium'">
-        </ion-icon>
-        <ion-icon [name]="totalRatting >= 2 ? 'star-outline':'star'" [color]="totalRatting >= 2 ? 'warning':'medium'">
-        </ion-icon>
-        <ion-icon [name]="totalRatting >= 3 ? 'star-outline':'star'" [color]="totalRatting >= 3 ? 'warning':'medium'">
-        </ion-icon>
-        <ion-icon [name]="totalRatting >= 4 ? 'star-outline':'star'" [color]="totalRatting >= 4 ? 'warning':'medium'">
-        </ion-icon>
-        <ion-icon [name]="totalRatting >= 5 ? 'star-outline':'star'" [color]="totalRatting >= 5 ? 'warning':'medium'">
-        </ion-icon>
-        ( {{ratting}} Calificaciones )
+      <div class="informacion">
+        <p class="horario">Horario</p>
+        <p class="horario2">{{openTime}} - {{closeTime}}  </p>
+        <p class="horario">Tiempo</p>
+        <p class="horario2">{{time}} min</p>
       </div>
-      <div class="deliveryAddress">
-        <img src="assets/pin.png" alt="" class="pin">
-        <p class="address"> {{address}}</p>
+  
+<div class="div_searchbar">
+      <ion-searchbar 
+       animated="true" mode="ios"
+      type="text"
+      class="search"
+      name="search-product"
+      [placeholder]="'Buscar productos'"
+      [(ngModel)]="searchByProduct"
+      (ngModelChange)="changeFilters()"
+      >
 
-      </div>
-   
+      </ion-searchbar>
+</div>
+
+
+
+
       <div *ngIf="categories?.length">
         <ion-segment #content (ionChange)="segmentChanged()" scrollable [(ngModel)]="caetId" mode="md">
           <ion-segment-button [value]="item.id" [id]="item.id" *ngFor="let item of categories">
             <ion-label> {{item.name}} </ion-label>
           </ion-segment-button>
         </ion-segment>
-        <div class="card_div">
+        
 
-          <div class="card" *ngFor="let item of foods;let i = index">
+        <div class="card_div">
+          <div class="card" *ngFor="let item of filteredProducts;let i = index">
             <div class="mainCat">
-              <img [src]="api.mediaURL+item.cover" class="image_div" onError="this.src='assets/placeholder.jpg'"
+              <img ionImgViewer [src]="api.mediaURL+item.cover" class="image_div" onError="this.src='assets/placeholder.jpg'"
                 [alt]="item.name">
               <div class="desc_div">
                 <ion-label class="heading_lbl">
                   {{ (item.name.length>20)? (item.name | slice:0:20)+'..':(item.name) }}
                 </ion-label>
-                <div class="ratting">
-                  <ion-icon [name]="item.rating >= 1 ? 'star-outline':'star'"
-                    [color]="item.rating >= 1 ? 'warning':'medium'">
-                  </ion-icon>
-                  <ion-icon [name]="item.rating >= 2 ? 'star-outline':'star'"
-                    [color]="item.rating >= 2 ? 'warning':'medium'">
-                  </ion-icon>
-                  <ion-icon [name]="item.rating >= 3 ? 'star-outline':'star'"
-                    [color]="item.rating >= 3 ? 'warning':'medium'">
-                  </ion-icon>
-                  <ion-icon [name]="item.rating >= 4 ? 'star-outline':'star'"
-                    [color]="item.rating >= 4 ? 'warning':'medium'">
-                  </ion-icon>
-                  <ion-icon [name]="item.rating >= 5 ? 'star-outline':'star'"
-                    [color]="item.rating >= 5 ? 'warning':'medium'">
-                  </ion-icon>
-                  ({{item.totalRatting ? item.totalRatting:0}}. {{util.translate('Rattings')}} )
-                </div>
                 <ion-label class="small_lbl">
                   {{ (item.details.length>30)? (item.details | slice:0:30)+'..':(item.details) }}
                 </ion-label>
@@ -81,9 +69,9 @@
                 </ion-label>
               </div>
               <div class="cartBtn" *ngIf="!cart.itemId.includes(item.id)">
-                <ion-label class="btns" (click)="add(i)">{{util.translate('Add')}}</ion-label>
+                <ion-label class="btns" (click)="add(i)">Añadir</ion-label>
                 <ion-label *ngIf="item && item.variations && item.variations?.length" style="font-size: 8px;">
-                  {{util.translate('customizable')}}</ion-label>
+                  Personalizable</ion-label>
               </div>
               <div class="cartBtn2" *ngIf="cart.itemId.includes(item.id)">
                 <ion-button (click)="removeQ(i)" fill="clear" size="small">
@@ -98,6 +86,11 @@
           </div>
         </div>
       </div>
+
+
+
+
+      
       <div *ngFor="let item of dummy">
         <ion-list>
           <ion-item>
@@ -132,14 +125,12 @@
 
 <ion-footer *ngIf="cart.cart.length && cart.cart.length > 0" (click)="viewCart()">
   <ion-toolbar color="primary">
-    <ion-label color="light">{{cart.totalItem}} {{util.translate('ITEM')}}</ion-label>
-    <ion-label color="light" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.totalPrice}} {{util.translate('total
-      price')}}</ion-label>
-    <ion-label color="light" *ngIf="util.cside ==='right'">{{cart.totalPrice}} {{util.currecny}} {{util.translate('total
-      price')}}</ion-label>
+    <ion-label color="light">{{cart.totalItem}} Productos</ion-label>
+    <ion-label color="light" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.totalPrice}} total</ion-label>
+    <ion-label color="light" *ngIf="util.cside ==='right'">{{cart.totalPrice}} {{util.currecny}} total</ion-label>
     <ion-button slot="end" fill="clear" color="light">
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      {{util.translate('View Cart')}}
+      Continuar
     </ion-button>
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
   </ion-toolbar>

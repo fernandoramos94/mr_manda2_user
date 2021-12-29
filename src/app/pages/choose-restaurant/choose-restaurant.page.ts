@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
@@ -46,7 +38,7 @@ export class ChooseRestaurantPage implements OnInit {
   }
 
   setFilteredItems() {
-    console.log('clear');
+  // console.log('clear');
     this.restaurants = [];
     this.restaurants = this.dummyRest;
   }
@@ -70,7 +62,7 @@ export class ChooseRestaurantPage implements OnInit {
       type: 1
     };
     this.api.post('stores/nearMe', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.status === 200 && data.data.length > 0) {
         data.data = data.data.filter(x => x.status === '1');
         data.data.forEach(element => {
@@ -82,10 +74,10 @@ export class ChooseRestaurantPage implements OnInit {
         });
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.dummyRest = [];
     }).catch(error => {
-      console.log(error);
+    // console.log(error);
       this.dummyRest = [];
     });
   }

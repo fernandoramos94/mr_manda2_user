@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component } from '@angular/core';
 import { Platform, ActionSheetController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -47,14 +39,14 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.backgroundColorByHexString('#ff384c');
+      this.statusBar.backgroundColorByHexString('#00b3f0');
       this.splashScreen.hide();
       this.util.cityAddress = localStorage.getItem('address');
       this.appPages = this.util.appPages; console.log('%c Copyright and Good Faith Purchasers © 2020-present initappz. ', 'background: #222; color: #bada55');
       const lng = localStorage.getItem('language');
       if (!lng || lng === null) {
         this.api.get('users/getDefaultSettings').then((data: any) => {
-          console.log('----------------- app setting', data);
+        // console.log('----------------- app setting', data);
           if (data && data.status === 200 && data.data) {
             const manage = data.data.manage;
             const language = data.data.lang;
@@ -93,7 +85,7 @@ export class AppComponent {
             }
 
             const general = data.data.general;
-            console.log('generalllll============================>', general);
+          // console.log('generalllll============================>', general);
             if (general && general.length > 0) {
               const info = general[0];
               this.util.general = info;
@@ -106,14 +98,14 @@ export class AppComponent {
             }
           }
         }, error => {
-          console.log('default settings', error);
+        // console.log('default settings', error);
         });
       } else {
         const param = {
           id: localStorage.getItem('language')
         };
         this.api.post('users/getDefaultSettingsById', param).then((data: any) => {
-          console.log('----------------- app setting', data);
+        // console.log('----------------- app setting', data);
           if (data && data.status === 200 && data.data) {
             const manage = data.data.manage;
             const language = data.data.lang;
@@ -151,7 +143,7 @@ export class AppComponent {
               document.documentElement.dir = this.util.direction;
             }
             const general = data.data.general;
-            console.log('generalllll============================>', general)
+          // console.log('generalllll============================>', general)
             if (general && general.length > 0) {
               const info = general[0];
               this.util.general = info;
@@ -164,7 +156,7 @@ export class AppComponent {
             }
           }
         }, error => {
-          console.log('default settings by id', error);
+        // console.log('default settings by id', error);
           this.util.appClosed = false;
           this.util.direction = 'ltr';
           this.util.cside = 'right';
@@ -173,11 +165,11 @@ export class AppComponent {
         });
       }
       if (this.platform.is('cordova')) {
-        console.log('cordova platform');
+      // console.log('cordova platform');
         setTimeout(async () => {
           await this.oneSignal.startInit(environment.onesignal.appId, environment.onesignal.googleProjectNumber);
           this.oneSignal.getIds().then((data: any) => {
-            console.log('iddddd', data);
+          // console.log('iddddd', data);
             localStorage.setItem('fcm', data.userId);
             const uid = localStorage.getItem('uid');
             if (uid && uid !== null && uid !== 'null') {
@@ -186,9 +178,9 @@ export class AppComponent {
                 fcm_token: data.userId
               };
               this.api.post('users/edit_profile', param).then((data: any) => {
-                console.log('user info=>', data);
+              // console.log('user info=>', data);
               }, error => {
-                console.log(error);
+              // console.log(error);
               });
             }
           });
@@ -205,7 +197,7 @@ export class AppComponent {
           id: uid
         };
         this.api.post('users/getById', param).then((data: any) => {
-          console.log('*******************', data);
+        // console.log('*******************', data);
           if (data && data.status === 200 && data.data && data.data.length && data.data[0].type === 'user') {
             this.util.userInfo = data.data[0];
           } else {
@@ -213,12 +205,12 @@ export class AppComponent {
           }
         }, error => {
           localStorage.removeItem('uid');
-          console.log(error);
+        // console.log(error);
         });
       }
 
       this.platform.backButton.subscribe(async () => {
-        console.log('asd', this.router.url, 'ad', this.router.isActive('/tabs/', true));
+      // console.log('asd', this.router.url, 'ad', this.router.isActive('/tabs/', true));
         if (this.router.url.includes('/tabs/') || this.router.url.includes('/login')) {
           navigator['app'].exitApp();
         }

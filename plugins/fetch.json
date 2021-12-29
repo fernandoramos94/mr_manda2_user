@@ -31,16 +31,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-ionic-webview": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-ionic-webview@^4.2.1"
-    },
-    "is_top_level": true,
-    "variables": {
-      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-    }
-  },
   "cordova-plugin-ionic-keyboard": {
     "source": {
       "type": "registry",
@@ -63,15 +53,9 @@
       "id": "cordova-plugin-geolocation@^4.0.2"
     },
     "is_top_level": true,
-    "variables": {}
-  },
-  "onesignal-cordova-plugin": {
-    "source": {
-      "type": "registry",
-      "id": "onesignal-cordova-plugin@^2.11.1"
-    },
-    "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "GPS_REQUIRED": "true"
+    }
   },
   "cordova-plugin-camera": {
     "source": {
@@ -89,7 +73,9 @@
       "id": "cordova-plugin-advanced-http@^3.1.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
+    }
   },
   "cordova-plugin-file": {
     "source": {
@@ -115,14 +101,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-androidx": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-androidx@^3.0.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-androidx-adapter": {
     "source": {
       "type": "registry",
@@ -131,14 +109,20 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova.plugins.diagnostic": {
+  "onesignal-cordova-plugin": {
     "source": {
       "type": "registry",
-      "id": "cordova.plugins.diagnostic@^6.0.2"
+      "id": "onesignal-cordova-plugin"
     },
     "is_top_level": true,
-    "variables": {
-      "ANDROIDX_VERSION": "1.+"
-    }
+    "variables": {}
+  },
+  "cordova-plugin-ionic-webview": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ionic-webview@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import * as moment from 'moment';
@@ -36,12 +28,12 @@ export class CouponsPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
-      console.log(data);
+    // console.log(data);
       if (data && data.restId) {
         this.restId = data.restId;
         this.name = data.name;
         this.total = parseFloat(data.totalPrice);
-        console.log(this.restId);
+      // console.log(this.restId);
       } else {
         this.dummy = [];
       }
@@ -50,45 +42,50 @@ export class CouponsPage implements OnInit {
   getOffers() {
     this.api.get('offers').then(data => {
       this.dummy = [];
-      console.log('list=====>', data);
+    // console.log('list=====>', data);
       this.list = [];
       if (data && data.status === 200 && data.data.length) {
         const currnetDate = moment().format('YYYY-MM-DD');
         data.data.forEach(element => {
-          console.log(moment(element.expire).isAfter(currnetDate));
+        // console.log(moment(element.expire).isAfter(currnetDate));
           if (element && element.status === '1' && moment(element.expire).isAfter(currnetDate)) {
-            console.log('yes=>', element);
+          // console.log('yes=>', element);
             element.available = element.available.split(',');
             this.list.push(element);
+          // console.log("elemento?",element)
           }
         });
         // this.list = data;
       }
     }).catch(error => {
       this.dummy = [];
-      console.log(error);
+    // console.log(error);
     });
   }
+
+  
   claim(item) {
-    console.log(item);
-    console.log(this.restId);
+  // console.log("elemento2?",item);
+  // console.log(this.restId);
     if (item && item.available && item.available.length) {
+    // console.log("EXPIRACION?",item.available)
       const data = item.available.includes(this.restId);
-      console.log(data);
-      if (data) {
+    // console.log(data);
+    // console.log(this.restId);
+      if (item) {
         if (this.total >= item.min) {
-          console.log('ok');
-          this.util.showToast(this.util.translate('Coupon Applied'), 'success', 'bottom');
+        // console.log('ok');
+          this.util.showToast('Cupón aplicado', 'success', 'bottom');
           this.util.publishCoupon(item);
           this.navCtrl.back();
         } else {
-          this.util.errorToast(this.util.translate('For claiming this coupon your order required minimum order  of $') + item.min);
+          this.util.errorToast('Para reclamar este cupón tu orden debe tener un mínimo de $' + item.min);
         }
       } else {
-        this.util.errorToast(this.util.translate('This coupon is not valid for ') + this.name);
+        this.util.errorToast('Cupón no válido para ' + this.name);
       }
     } else {
-      this.util.errorToast(this.util.translate('This coupon is not valid for ') + this.name);
+      this.util.errorToast('Este cupón no es válido para ' + this.name);
     }
   }
   expire(date) {

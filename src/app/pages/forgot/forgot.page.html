@@ -14,7 +14,7 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{util.translate('Reset password')}}</ion-title>
+    <ion-title>Restaurar contraseña</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -24,39 +24,39 @@
       <img src="assets/icon.png" alt="" class="icon">
     </div>
     <div class="form_div" *ngIf="util.reset_pwd ==='0'">
-      <ion-label class="main_head"> {{util.translate('Reset Password')}} </ion-label>
+      <ion-label class="main_head"> Restaurar contraseña</ion-label>
       <div *ngIf="div_type === 1">
-        <ion-input type="email" [placeholder]="util.translate('Email')" [(ngModel)]="email">
+        <ion-input type="email" [placeholder]="('Correo')" [(ngModel)]="email">
           <ion-icon name="mail" slot="icon-only"></ion-icon>
         </ion-input>
 
         <ion-button expand="block" [disabled]="loggedIn" (click)="sendOTP()">
-          <span *ngIf="!loggedIn"> {{util.translate('Send OTP')}} </span>
+          <span *ngIf="!loggedIn"> Restaurar </span>
           <ion-spinner name="circular" *ngIf="loggedIn"></ion-spinner>
         </ion-button>
       </div>
 
       <div *ngIf="div_type === 2">
-        <ion-input type="number" [placeholder]="util.translate('OTP')" [(ngModel)]="otp">
+        <ion-input type="number" [placeholder]="('Código')" [(ngModel)]="otp">
           <ion-icon name="key" slot="icon-only"></ion-icon>
         </ion-input>
 
         <ion-button expand="block" [disabled]="loggedIn" (click)="verifyOTP()">
-          <span *ngIf="!loggedIn"> {{util.translate('Verify OTP')}} </span>
+          <span *ngIf="!loggedIn"> Verificar </span>
           <ion-spinner name="circular" *ngIf="loggedIn"></ion-spinner>
         </ion-button>
       </div>
 
       <div *ngIf="div_type === 3">
-        <ion-input type="password" [placeholder]="util.translate('New Password')" [(ngModel)]="password">
+        <ion-input type="password" [placeholder]="('Nueva contraseá')" [(ngModel)]="password">
           <ion-icon name="key" slot="icon-only"></ion-icon>
         </ion-input>
-        <ion-input type="password" [placeholder]="util.translate('Confirm Password')" [(ngModel)]="repass">
+        <ion-input type="password" [placeholder]="('Confirmar contraseña')" [(ngModel)]="repass">
           <ion-icon name="key" slot="icon-only"></ion-icon>
         </ion-input>
 
         <ion-button expand="block" [disabled]="loggedIn" (click)="sendEmail()">
-          <span *ngIf="!loggedIn"> {{util.translate('Reset Password')}} </span>
+          <span *ngIf="!loggedIn"> Restaurar </span>
           <ion-spinner name="circular" *ngIf="loggedIn"></ion-spinner>
         </ion-button>
       </div>
@@ -71,12 +71,12 @@
             </ion-input>
           </ion-col>
           <ion-col size="9">
-            <ion-input [(ngModel)]="phone" type="number" [placeholder]="util.translate('Mobile Number')">
+            <ion-input [(ngModel)]="phone" type="number" [placeholder]="('Teléfono')">
             </ion-input>
           </ion-col>
         </ion-row>
         <ion-button expand="block" [disabled]="loggedIn" (click)="sendOTPOnMobile()">
-          <span *ngIf="!loggedIn"> {{util.translate('Send OTP')}} </span>
+          <span *ngIf="!loggedIn"> Enviar código </span>
           <ion-spinner name="circular" *ngIf="loggedIn"></ion-spinner>
         </ion-button>
       </div>

@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
@@ -39,14 +31,14 @@ export class ContactsPage implements OnInit {
     public util: UtilService,
     public api: ApisService
   ) {
-    console.log('address-->>', this.util.general);
+  // console.log('address-->>', this.util.general);
     if (this.util.general && this.util.general.address) {
       const geocoder = new google.maps.Geocoder;
       geocoder.geocode({
         address: this.util.general.address + ' ' + this.util.general.city + ' ' +
           this.util.general.state + ' ' + this.util.general.country + ' ' + this.util.general.zip
       }, (results, status) => {
-        console.log(results, status);
+      // console.log(results, status);
         if (status === 'OK' && results && results.length) {
           this.latOri = results[0].geometry.location.lat();
           this.longOri = results[0].geometry.location.lng();
@@ -100,7 +92,7 @@ export class ContactsPage implements OnInit {
   }
 
   submit() {
-    console.log('contact', this.contact);
+  // console.log('contact', this.contact);
     if (this.contact.name === '' || this.contact.email === '' || this.contact.message === '') {
       this.util.errorToast(this.util.translate('All Fields are required'));
       return false;
@@ -118,9 +110,9 @@ export class ContactsPage implements OnInit {
         email: this.contact.email
       };
       this.api.post('users/contactResponse', param).then((data: any) => {
-        console.log(data);
+      // console.log(data);
       }, error => {
-        console.log(error);
+      // console.log(error);
       });
       this.contact.email = '';
       this.contact.name = '';
@@ -128,13 +120,11 @@ export class ContactsPage implements OnInit {
       if (data && data.status === 200) {
         this.success();
       } else {
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      }
+        this.util.errorToast('Algo ha ido mal');      }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.hide();
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   success() {

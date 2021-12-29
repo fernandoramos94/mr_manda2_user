@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+//
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -34,37 +26,42 @@ import { ProductRatingPageModule } from './pages/product-rating/product-rating.m
 import { DriverRatingPageModule } from './pages/driver-rating/driver-rating.module';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { SelectCountryPageModule } from './pages/select-country/select-country.module';
+import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    ChooseAddressPageModule,
-    HttpClientModule,
-    SelectDriversPageModule,
-    VariationsPageModule,
-    VerifyPageModule,
-    ProductRatingPageModule,
-    DriverRatingPageModule,
-    SelectCountryPageModule,
-    IonicStorageModule.forRoot()
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    AndroidPermissions,
-    Geolocation,
-    OneSignal,
-    Camera,
-    HTTP,
-    InAppBrowser,
-    Diagnostic,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    entryComponents: [
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        ChooseAddressPageModule,
+        HttpClientModule,
+        SelectDriversPageModule,
+        VariationsPageModule,
+        VerifyPageModule,
+        ProductRatingPageModule,
+        DriverRatingPageModule,
+        SelectCountryPageModule,
+        NgxIonicImageViewerModule,
+        IonicStorageModule.forRoot()
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        AndroidPermissions,
+        Geolocation,
+        LocationAccuracy,
+        OneSignal,
+        Camera,
+        HTTP,
+        InAppBrowser,
+        Diagnostic,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

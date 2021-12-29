@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { login } from 'src/app/interfaces/login';
 import { NavigationExtras, Router } from '@angular/router';
@@ -43,11 +35,11 @@ export class LoginPage implements OnInit {
     private modalController: ModalController,
     private modalCtrl: ModalController
   ) {
-    console.log('--------------- user login', this.util.user_login);
+  // console.log('--------------- user login', this.util.user_login);
     this.mobile.ccCode = '+91';
     this.mobileLogin.ccCode = '+91';
     this.oneSignal.getIds().then((data) => {
-      console.log('iddddd==========', data);
+    // console.log('iddddd==========', data);
       localStorage.setItem('fcm', data.userId);
     });
   }
@@ -57,20 +49,20 @@ export class LoginPage implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    console.log('form', form);
+  // console.log('form', form);
     this.submitted = true;
     if (form.valid) {
       const emailfilter = /^[\w._-]+[+]?[\w._-]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
       if (!emailfilter.test(this.login.email)) {
-        this.util.showToast(this.util.translate('Please enter valid email'), 'danger', 'bottom');
+        this.util.showToast('Por favor ingresa un correo válido', 'danger', 'bottom');
         return false;
       }
-      console.log('login');
+    // console.log('login');
       this.isLogin = true;
 
       this.api.post('users/login', this.login).then((data: any) => {
         this.isLogin = false;
-        console.log(data);
+      // console.log(data);
         if (data && data.status === 200) {
           if (data && data.data && data.data.type === 'user') {
             if (data.data.status === '1') {
@@ -83,9 +75,9 @@ export class LoginPage implements OnInit {
                   fcm_token: fcm
                 };
                 this.api.post('users/edit_profile', updateParam).then((data: any) => {
-                  console.log('user info=>', data);
+                // console.log('user info=>', data);
                 }, error => {
-                  console.log(error);
+                // console.log(error);
                 });
               }
 
@@ -93,28 +85,28 @@ export class LoginPage implements OnInit {
                 id: data.data.id
               }
               this.api.post('favourite/getByUid', favParam).then((data: any) => {
-                console.log('fav data', data);
+              // console.log('fav data', data);
                 if (data && data.status === 200 && data.data.length > 0) {
                   this.util.haveFav = true;
                   try {
                     this.util.favIds = data.data[0].ids.split(',');
                   } catch (error) {
-                    console.log('eroor', error);
+                  // console.log('eroor', error);
                   }
                 } else {
                   this.util.haveFav = false;
                 }
               }, error => {
                 this.util.haveFav = false;
-                console.log('fav error', error);
+              // console.log('fav error', error);
               });
 
               this.navCtrl.navigateRoot(['']);
             } else {
-              console.log('not valid');
+            // console.log('not valid');
               Swal.fire({
                 title: this.util.translate('Error'),
-                text: this.util.translate('Your are blocked please contact administrator'),
+                text: 'Por favor contacta al administrador',
                 icon: 'error',
                 showConfirmButton: true,
                 showCancelButton: true,
@@ -137,27 +129,26 @@ export class LoginPage implements OnInit {
               });
             }
           } else {
-            this.util.errorToast(this.util.translate('Not valid user'));
+            this.util.errorToast('Usuario no válido');
             this.login.email = '';
             this.login.password = '';
           }
         } else if (data && data.status === 500) {
           this.util.errorToast(data.data.message);
         } else {
-          this.util.errorToast(this.util.translate('Something went wrong'));
+          this.util.errorToast('Algo ha ido mal');
         }
       }, error => {
-        console.log(error);
+      // console.log(error);
         this.isLogin = false;
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
 
     }
   }
 
   onPhoneLogin(form: NgForm) {
-    console.log('form', form, this.mobile);
-    console.log(this.mobile.ccCode + this.mobile.phone);
+  // console.log('form', form, this.mobile);
+  // console.log(this.mobile.ccCode + this.mobile.phone);
 
     this.submitted = true;
     if (form.valid) {
@@ -169,7 +160,7 @@ export class LoginPage implements OnInit {
       this.isLogin = true;
       this.api.post('users/loginWithPhoneAndPassword', param).then((data) => {
         this.isLogin = false;
-        console.log(data);
+      // console.log(data);
         if (data && data.status === 200) {
           if (data && data.data && data.data.type === 'user') {
             if (data.data.status === '1') {
@@ -182,9 +173,9 @@ export class LoginPage implements OnInit {
                   fcm_token: fcm
                 };
                 this.api.post('users/edit_profile', updateParam).then((data: any) => {
-                  console.log('user info=>', data);
+                // console.log('user info=>', data);
                 }, error => {
-                  console.log(error);
+                // console.log(error);
                 });
               }
 
@@ -192,28 +183,28 @@ export class LoginPage implements OnInit {
                 id: data.data.id
               }
               this.api.post('favourite/getByUid', favParam).then((data: any) => {
-                console.log('fav data', data);
+              // console.log('fav data', data);
                 if (data && data.status === 200 && data.data.length > 0) {
                   this.util.haveFav = true;
                   try {
                     this.util.favIds = data.data[0].ids.split(',');
                   } catch (error) {
-                    console.log('eroor', error);
+                  // console.log('eroor', error);
                   }
                 } else {
                   this.util.haveFav = false;
                 }
               }, error => {
                 this.util.haveFav = false;
-                console.log('fav error', error);
+              // console.log('fav error', error);
               });
 
               this.navCtrl.navigateRoot(['']);
             } else {
-              console.log('not valid');
+            // console.log('not valid');
               Swal.fire({
                 title: this.util.translate('Error'),
-                text: this.util.translate('Your are blocked please contact administrator'),
+                text: 'Por favor contacta al administrador',
                 icon: 'error',
                 showConfirmButton: true,
                 showCancelButton: true,
@@ -236,24 +227,21 @@ export class LoginPage implements OnInit {
               });
             }
           } else {
-            this.util.errorToast(this.util.translate('Not valid user'));
+            this.util.errorToast('Usuario no válido');
             this.login.email = '';
             this.login.password = '';
           }
         } else if (data && data.status === 500) {
           this.util.errorToast(data.data.message);
         } else {
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        }
+          this.util.errorToast('Algo ha ido mal');        }
       }, error => {
-        console.log(error);
+      // console.log(error);
         this.isLogin = false;
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      }).catch(error => {
-        console.log(error);
+        this.util.errorToast('Algo ha ido mal');      }).catch(error => {
+      // console.log(error);
         this.isLogin = false;
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
     }
 
 
@@ -262,7 +250,7 @@ export class LoginPage implements OnInit {
 
 
   onOTPLogin(form: NgForm) {
-    console.log(this.mobileLogin);
+  // console.log(this.mobileLogin);
     this.submitted = true;
     if (form.valid) {
       const param = {
@@ -272,42 +260,39 @@ export class LoginPage implements OnInit {
       this.isLogin = true;
       this.api.post('users/checkMobileNumber', param).then((data) => {
         this.isLogin = false;
-        console.log(data);
+      // console.log(data);
         if (data && data.status === 200) {
-          console.log('open modal');
+        // console.log('open modal');
           this.openModal(data.data.id);
         } else if (data && data.status === 500) {
           this.util.errorToast(data.data.message);
         } else {
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        }
+          this.util.errorToast('Algo ha ido mal');        }
       }, error => {
-        console.log(error);
+      // console.log(error);
         this.isLogin = false;
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      }).catch(error => {
-        console.log(error);
+        this.util.errorToast('Algo ha ido mal');      }).catch(error => {
+      // console.log(error);
         this.isLogin = false;
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
     }
   }
 
   async openModal(uid) {
-    console.log('uid', uid);
+  // console.log('uid', uid);
     const modal = await this.modalCtrl.create({
       component: VerifyPage,
       componentProps: { code: this.mobileLogin.ccCode, phone: this.mobileLogin.phone }
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'ok') {
         const param = {
           id: uid
         };
         this.api.post('users/getById', param).then((data: any) => {
-          console.log('user data', data);
+        // console.log('user data', data);
           if (data && data.status === 200 && data.data && data.data.length && data.data[0].type === 'user') {
             this.util.userInfo = data.data[0];
             if (data && data.data && data.data[0].type === 'user') {
@@ -320,9 +305,9 @@ export class LoginPage implements OnInit {
                     fcm_token: fcm
                   };
                   this.api.post('users/edit_profile', updateParam).then((data: any) => {
-                    console.log('user info=>', data);
+                  // console.log('user info=>', data);
                   }, error => {
-                    console.log(error);
+                  // console.log(error);
                   });
                 }
 
@@ -330,28 +315,28 @@ export class LoginPage implements OnInit {
                   id: uid
                 }
                 this.api.post('favourite/getByUid', favParam).then((data: any) => {
-                  console.log('fav data', data);
+                // console.log('fav data', data);
                   if (data && data.status === 200 && data.data.length > 0) {
                     this.util.haveFav = true;
                     try {
                       this.util.favIds = data.data[0].ids.split(',');
                     } catch (error) {
-                      console.log('eroor', error);
+                    // console.log('eroor', error);
                     }
                   } else {
                     this.util.haveFav = false;
                   }
                 }, error => {
                   this.util.haveFav = false;
-                  console.log('fav error', error);
+                // console.log('fav error', error);
                 });
 
                 this.navCtrl.navigateRoot(['']);
               } else {
-                console.log('not valid');
+              // console.log('not valid');
                 Swal.fire({
                   title: this.util.translate('Error'),
-                  text: this.util.translate('Your are blocked please contact administrator'),
+                  text: 'Por favor contacta al administrador',
                   icon: 'error',
                   showConfirmButton: true,
                   showCancelButton: true,
@@ -372,18 +357,17 @@ export class LoginPage implements OnInit {
                 });
               }
             } else {
-              this.util.errorToast(this.util.translate('Not valid user'));
+              this.util.errorToast('Usuario no válido');
               this.login.email = '';
               this.login.password = '';
             }
           } else if (data && data.status === 500) {
             this.util.errorToast(data.data.message);
           } else {
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          }
+            this.util.errorToast('Algo ha ido mal');          }
         }, error => {
           localStorage.removeItem('uid');
-          console.log(error);
+        // console.log(error);
         });
       }
     });
@@ -406,16 +390,16 @@ export class LoginPage implements OnInit {
   }
 
   async openCountry() {
-    console.log('open ccode');
+  // console.log('open ccode');
     const modal = await this.modalController.create({
       component: SelectCountryPage,
       backdropDismiss: false,
       showBackdrop: true,
     });
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.role === 'selected') {
-        console.log('ok');
+      // console.log('ok');
         this.mobile.ccCode = '+' + data.data;
         this.mobileLogin.ccCode = '+' + data.data;
       }

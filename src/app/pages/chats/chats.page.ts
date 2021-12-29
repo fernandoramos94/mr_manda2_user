@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { Router, NavigationExtras } from '@angular/router';
@@ -38,7 +30,7 @@ export class ChatsPage implements OnInit {
     };
     this.dummy = Array(10);
     this.api.post('chats/getByGroup', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.status === 200) {
         const info = [];
         data.data.forEach(element => {
@@ -47,29 +39,27 @@ export class ChatsPage implements OnInit {
         });
         let uniq = [...new Set(info)];
         uniq = uniq.filter(x => x !== localStorage.getItem('uid'));
-        console.log('uniq->>', uniq);
+      // console.log('uniq->>', uniq);
         const uid = {
           id: uniq.join()
         };
         this.api.post('stores/getChatsNames', uid).then((uids: any) => {
           this.dummy = [];
-          console.log(uids);
+        // console.log(uids);
           if (uids && uids.status === 200) {
             this.users = uids.data;
           }
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.users = [];
           this.dummy = [];
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       } else {
         this.dummy = [];
       }
     }, error => {
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
   ngOnInit() {
   }
@@ -90,7 +80,7 @@ export class ChatsPage implements OnInit {
   }
 
   onChat(item) {
-    console.log(localStorage.getItem('uid'));
+  // console.log(localStorage.getItem('uid'));
     const param: NavigationExtras = {
       queryParams: {
         id: item.id,

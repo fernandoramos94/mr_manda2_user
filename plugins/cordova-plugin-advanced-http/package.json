@@ -1,38 +1,34 @@
 {
-  "_args": [
-    [
-      "cordova-plugin-advanced-http@3.1.0",
-      "/Users/alejandrodiaz/Desktop/TELO 2.0/App_code/Telo Usuario"
-    ]
-  ],
-  "_from": "cordova-plugin-advanced-http@3.1.0",
-  "_id": "cordova-plugin-advanced-http@3.1.0",
+  "_from": "cordova-plugin-advanced-http@^3.1.0",
+  "_id": "cordova-plugin-advanced-http@3.2.2",
   "_inBundle": false,
-  "_integrity": "sha512-zlTlNJyTttE7TV5vW2WGvHqpbKMDVrr1meZU0fy4y3ObrI/hGk2UDcDNwpZdMfaytNZwDKU4sRgsTgQYdFNBew==",
+  "_integrity": "sha512-9djtQuRwWMqCLTNRrtAIlGyRcs2D0AJXOzkedOQ6udlg3IVE58hhxjrFOdKz6WvoJ6w2MNVeRYafYvoWLHFuMA==",
   "_location": "/cordova-plugin-advanced-http",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-advanced-http@3.1.0",
+    "raw": "cordova-plugin-advanced-http@^3.1.0",
     "name": "cordova-plugin-advanced-http",
     "escapedName": "cordova-plugin-advanced-http",
-    "rawSpec": "3.1.0",
+    "rawSpec": "^3.1.0",
     "saveSpec": null,
-    "fetchSpec": "3.1.0"
+    "fetchSpec": "^3.1.0"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-3.1.0.tgz",
-  "_spec": "3.1.0",
-  "_where": "/Users/alejandrodiaz/Desktop/TELO 2.0/App_code/Telo Usuario",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-3.2.2.tgz",
+  "_shasum": "186b19d22cc556b9f9004c50c72be3fcc757c573",
+  "_spec": "cordova-plugin-advanced-http@^3.1.0",
+  "_where": "/Users/fernandoramostimote/Documents/MrManda2 Usuario",
   "author": {
     "name": "Wymsee"
   },
   "bugs": {
     "url": "https://github.com/silkimen/cordova-plugin-advanced-http/issues"
   },
+  "bundleDependencies": false,
   "contributors": [
     {
       "name": "devgeeks"
@@ -69,12 +65,13 @@
       "android"
     ]
   },
+  "deprecated": false,
   "description": "Cordova / Phonegap plugin for communicating with HTTP servers using SSL pinning",
   "devDependencies": {
     "chai": "4.2.0",
     "colors": "1.4.0",
-    "cordova": "9.0.0",
-    "mocha": "8.0.1",
+    "cordova": "10.0.0",
+    "mocha": "8.2.0",
     "umd-tough-cookie": "2.4.3",
     "wd": "1.12.1",
     "xml2js": "0.4.23"
@@ -113,5 +110,5 @@
     "testjs": "mocha ./test/js-specs.js",
     "updatecert": "node ./scripts/update-e2e-server-cert.js && node ./scripts/update-e2e-client-cert.js"
   },
-  "version": "3.1.0"
+  "version": "3.2.2"
 }

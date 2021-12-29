@@ -1,24 +1,16 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #ff384c;
+  --ion-color-primary: #00b3f0;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #ff384c;
-  --ion-color-primary-tint: #ff384c;
+  --ion-color-primary-shade: #00b3f0;
+  --ion-color-primary-tint: #00b3f0;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -53,12 +45,12 @@
   --ion-color-warning-tint: #ffca22;
 
   /** danger **/
-  --ion-color-danger: #eb445a;
+  --ion-color-danger: #00b3f0;
   --ion-color-danger-rgb: 235, 68, 90;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #cf3c4f;
-  --ion-color-danger-tint: #ed576b;
+  --ion-color-danger-shade: #00b3f0;
+  --ion-color-danger-tint: #00b3f0;
 
   /** dark **/
   --ion-color-dark: #222428;

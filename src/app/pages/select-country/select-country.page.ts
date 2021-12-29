@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service'
@@ -32,7 +24,7 @@ export class SelectCountryPage implements OnInit {
       this.dummyLoad = [];
       this.dummy = this.util.countrys;
       this.countries = this.dummy;
-      console.log(this.dummy);
+    // console.log(this.dummy);
     }, 500);
 
   }
@@ -45,7 +37,7 @@ export class SelectCountryPage implements OnInit {
   }
 
   onSearchChange(events) {
-    console.log(events);
+  // console.log(events);
     if (events.value !== '') {
       this.countries = this.dummy.filter((item) => {
         return item.country_name.toLowerCase().indexOf(events.detail.value.toLowerCase()) > -1;
@@ -56,7 +48,7 @@ export class SelectCountryPage implements OnInit {
   }
 
   okay() {
-    console.log(this.ccCode);
+  // console.log(this.ccCode);
     this.modalCtrl.dismiss(this.ccCode, 'selected');
   }
 }

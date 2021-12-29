@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -14,6 +6,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Router } from '@angular/router';
 import { Platform, AlertController, NavController, MenuController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
+import { LocationService } from 'src/app/services/location.service';
 declare var google;
 @Component({
   selector: 'app-pick-location',
@@ -42,6 +35,7 @@ export class PickLocationPage implements OnInit {
     private navCtrl: NavController,
     private menuController: MenuController,
     private diagnostic: Diagnostic,
+    private locationService : LocationService
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.geocoder = new google.maps.Geocoder();
@@ -84,30 +78,13 @@ export class PickLocationPage implements OnInit {
     this.navCtrl.back();
   }
 
-  getLocation() {
-    this.platform.ready().then(() => {
-      if (this.platform.is('android')) {
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-          result => console.log('Has permission?', result.hasPermission),
-          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-        );
-        this.grantRequest();
-      } else if (this.platform.is('ios')) {
-        this.grantRequest();
-      } else {
-        this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 10000, enableHighAccuracy: false }).then((resp) => {
-          if (resp) {
-            console.log('resp', resp);
-            this.lat = resp.coords.latitude;
-            this.lng = resp.coords.longitude;
-            this.getAddress(this.lat, this.lng);
-          }
-        }).catch(error => {
-          console.log(error);
-          this.grantRequest();
-        });
-      }
-    });
+  async getLocation() {
+    const data = await this.locationService.getLocationCoordinates();
+    
+
+    if(data){
+        this.getAddress(data.lat, data.lng);
+    }
   }
 
   askPermission() {
@@ -119,38 +96,36 @@ export class PickLocationPage implements OnInit {
       if (data) {
         this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 10000, enableHighAccuracy: false }).then((resp) => {
           if (resp) {
-            console.log('resp', resp);
+          // console.log('resp', resp);
             this.lat = resp.coords.latitude;
             this.lng = resp.coords.longitude;
             this.getAddress(resp.coords.latitude, resp.coords.longitude);
           }
         }).catch(error => {
-          console.log('ERORROR 1 and open', JSON.stringify(error));
+        // console.log('ERORROR 1 and open', JSON.stringify(error));
           this.diagnostic.switchToSettings();
         });
       } else {
         this.diagnostic.switchToSettings();
         this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 10000, enableHighAccuracy: false }).then((resp) => {
           if (resp) {
-            console.log('ress,', resp);
+          // console.log('ress,', resp);
             this.lat = resp.coords.latitude;
             this.lng = resp.coords.longitude;
             this.getAddress(resp.coords.latitude, resp.coords.longitude);
           }
         }).catch(error => {
-          console.log('ERORROR 1 and open', JSON.stringify(error));
+        // console.log('ERORROR 1 and open', JSON.stringify(error));
           this.diagnostic.switchToSettings();
         });
       }
     }, error => {
-      console.log('errir ????????????????/', error);
       if (this.platform.is('ios')) {
         this.iOSAlert();
       } else {
         this.presentAlertConfirm();
       }
     }).catch(error => {
-      console.log('error ******************', error);
       if (this.platform.is('ios')) {
         this.iOSAlert();
       } else {
@@ -165,8 +140,6 @@ export class PickLocationPage implements OnInit {
     const geocoder = new google.maps.Geocoder();
     const location = new google.maps.LatLng(lat, lng);
     geocoder.geocode({ 'location': location }, (results, status) => {
-      console.log(results);
-      console.log('status', status);
       if (results && results.length) {
         this.lat = lat;
         this.lng = lng;
@@ -193,12 +166,12 @@ export class PickLocationPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Ok',
           handler: () => {
-            console.log('Confirm Okay');
+          // console.log('Confirm Okay');
             this.diagnostic.switchToSettings();
           }
         }
@@ -218,12 +191,12 @@ export class PickLocationPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Okay',
           handler: () => {
-            console.log('Confirm Okay');
+          // console.log('Confirm Okay');
             this.askPermission();
           }
         }
@@ -254,26 +227,21 @@ export class PickLocationPage implements OnInit {
     }
 
     this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete1.query }, (predictions, status) => {
-      console.log(predictions);
       if (predictions && predictions.length > 0) {
         this.autocompleteItems1 = predictions;
-        console.log(this.autocompleteItems1);
       }
     });
   }
 
   selectSearchResult1(item) {
-    console.log('select', item);
     localStorage.setItem('addsSelected', 'true');
     this.autocompleteItems1 = [];
     this.autocomplete1.query = item.description;
     this.util.cityAddress = item.description;
     this.geocoder.geocode({ placeId: item.place_id }, (results, status) => {
       if (status === 'OK' && results[0]) {
-        console.log(status);
         this.lat = results[0].geometry.location.lat();
         this.lng = results[0].geometry.location.lng();
-        console.log(this.lat, this.lng);
         this.chMod.detectChanges();
         this.loadMap(this.lat, this.lng);
       }

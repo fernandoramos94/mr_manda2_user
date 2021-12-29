@@ -4,7 +4,7 @@ Cordova Advanced HTTP
 [![MIT Licence](https://img.shields.io/badge/license-MIT-blue?style=flat)](https://opensource.org/licenses/mit-license.php)
 [![downloads/month](https://img.shields.io/npm/dm/cordova-plugin-advanced-http.svg)](https://www.npmjs.com/package/cordova-plugin-advanced-http)
 
-[![Travis Build Status](https://img.shields.io/travis/silkimen/cordova-plugin-advanced-http/master?label=Travis%20CI)](https://travis-ci.org/silkimen/cordova-plugin-advanced-http)
+[![Travis Build Status](https://img.shields.io/travis/com/silkimen/cordova-plugin-advanced-http/master?label=Travis%20CI)](https://app.travis-ci.com/silkimen/cordova-plugin-advanced-http)
 [![GitHub Build Status](https://img.shields.io/github/workflow/status/silkimen/cordova-plugin-advanced-http/Cordova%20HTTP%20Plugin%20CI/master?label=GitHub%20Actions)](https://github.com/silkimen/cordova-plugin-advanced-http/actions)
 
 
@@ -33,6 +33,19 @@ phonegap plugin add cordova-plugin-advanced-http
 
 cordova plugin add cordova-plugin-advanced-http
 ```
+
+### Plugin Preferences
+
+`AndroidBlacklistSecureSocketProtocols`: define a blacklist of secure socket protocols for Android. This preference allows you to disable protocols which are considered unsafe. You need to provide a comma-separated list of protocols ([check Android SSLSocket#protocols docu for protocol names](https://developer.android.com/reference/javax/net/ssl/SSLSocket#protocols)).
+
+e.g. blacklist `SSLv3` and `TLSv1`:
+```xml
+<preference name="AndroidBlacklistSecureSocketProtocols" value="SSLv3,TLSv1" />
+```
+
+## Currently known issues
+
+- [abort](#abort)ing sent requests is not working reliably
 
 ## Usage
 
@@ -115,10 +128,24 @@ This defaults to `urlencoded`. You can also override the default content type he
 :warning: `multipart` depends on several Web API standards which need to be supported in your web view. Check out https://github.com/silkimen/cordova-plugin-advanced-http/wiki/Web-APIs-required-for-Multipart-requests for more info.
 
 ### setRequestTimeout
-Set the "read" timeout in seconds. This is the timeout interval to use when waiting for additional data.
-
+Set how long to wait for a request to respond, in seconds.
+For Android, this will set both [connectTimeout](https://developer.android.com/reference/java/net/URLConnection#getConnectTimeout()) and [readTimeout](https://developer.android.com/reference/java/net/URLConnection#setReadTimeout(int)).
+For iOS, this will set [timeout interval](https://developer.apple.com/documentation/foundation/nsmutableurlrequest/1414063-timeoutinterval).
+For browser platform, this will set [timeout](https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest/timeout).
 ```js
 cordova.plugin.http.setRequestTimeout(5.0);
+```
+
+### setConnectTimeout (Android Only)
+Set connect timeout for Android
+```js
+cordova.plugin.http.setRequestTimeout(5.0);
+```
+
+### setReadTimeout (Android Only)
+Set read timeout for Android
+```js
+cordova.plugin.http.setReadTimeout(5.0);
 ```
 
 ### setFollowRedirect<a name="setFollowRedirect"></a>
@@ -477,6 +504,28 @@ This plugin uses amazing cloud services to maintain quality. CI Builds and E2E t
 * [BrowserStack](https://www.browserstack.com/)
 * [Sauce Labs](https://saucelabs.com/)
 * [httpbin.org](https://httpbin.org/)
+* [go-httpbin](https://httpbingo.org/)
+
+### Local Testing
+
+First, install current package with `npm install` to fetch dev dependencies.
+
+Then, to execute Javascript tests:
+```shell
+npm run testjs
+```
+
+And, to execute E2E tests:
+- setup local Android sdk and emulators, or Xcode and simulators for iOS
+  - launch emulator or simulator
+- install [Appium](http://appium.io/) (see [Getting Started](https://github.com/appium/appium/blob/HEAD/docs/en/about-appium/getting-started.md))
+  - start `appium`
+- run
+  -  updating client and server certificates, building test app, and running e2e tests
+```shell
+npm run testandroid
+npm run testios
+```
 
 ## Contribute & Develop
 

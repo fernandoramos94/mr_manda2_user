@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
@@ -33,26 +25,26 @@ export class DriverRatingPage implements OnInit {
   ) {
 
     this.route.queryParams.subscribe((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.id && data.name) {
         this.id = data.id;
         this.name = data.name;
         this.way = 'order';
-        console.log('id', this.id);
-        console.log('name', this.name);
+      // console.log('id', this.id);
+      // console.log('name', this.name);
         const param = {
           where: 'did = ' + this.id
         };
         this.util.show();
         this.api.post('rating/getFromCount', param).then((data: any) => {
           this.util.hide();
-          console.log('data', data);
+        // console.log('data', data);
           if (data && data.status === 200) {
             if (data && data.data && data.data.total) {
               this.total = data.data.total;
               if (data.data.rating) {
                 const rats = data.data.rating;
-                console.log(rats.split(','));
+              // console.log(rats.split(','));
                 this.rating = rats.split(',');
               } else {
                 this.rating = [];
@@ -65,9 +57,9 @@ export class DriverRatingPage implements OnInit {
             this.total = 0;
             this.rating = [];
           }
-          console.log('total', this.total);
+        // console.log('total', this.total);
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.util.hide();
           this.total = 0;
           this.rating = [];
@@ -85,7 +77,7 @@ export class DriverRatingPage implements OnInit {
   }
 
   onRatingChange(event) {
-    console.log(event);
+  // console.log(event);
   }
 
   submit() {
@@ -93,16 +85,15 @@ export class DriverRatingPage implements OnInit {
     let count = 0;
     const sum = this.rating.reduce((sum, item, index) => {
       item = parseFloat(item);
-      console.log(sum, item, index);
+    // console.log(sum, item, index);
       count += item;
       return sum + item * (index + 1);
     }, 0);
-    console.log(sum / count);
+  // console.log(sum / count);
     const storeRating = (sum / count).toFixed(2);
-    console.log('rate', this.rate, this.comment);
+  // console.log('rate', this.rate, this.comment);
     if (this.comment === '') {
-      this.util.errorToast(this.util.translate('Something went wrong'));
-      return false;
+      this.util.errorToast('Algo ha ido mal');      return false;
     }
     const param = {
       uid: localStorage.getItem('uid'),
@@ -118,19 +109,17 @@ export class DriverRatingPage implements OnInit {
 
     this.util.show();
     this.api.post('rating/save', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.util.hide();
       if (data && data.status === 200) {
         this.util.showToast(this.util.translate('Rating added'), 'success', 'bottom');
         this.close();
       } else {
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      }
+        this.util.errorToast('Algo ha ido mal');      }
     }, error => {
       this.util.hide();
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
 }

@@ -1,0 +1,23 @@
+   //
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { ScheduleOrderPageRoutingModule } from './schedule-order-routing.module';
+
+import { ScheduleOrderPage } from './schedule-order.page';
+// import { ComponentsModule } from 'src/app/components/components.module';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ScheduleOrderPageRoutingModule,
+    // ComponentsModule,
+  ],
+  declarations: [ScheduleOrderPage],
+})
+export class ScheduleOrderPageModule {}

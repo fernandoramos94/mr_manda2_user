@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { NavController, ActionSheetController } from '@ionic/angular';
@@ -33,7 +25,7 @@ export class EditProfilePage implements OnInit {
     private camera: Camera,
   ) {
     this.edit_flag = true;
-    console.log(localStorage.getItem('uid'));
+  // console.log(localStorage.getItem('uid'));
     this.getProfile();
   }
 
@@ -47,7 +39,7 @@ export class EditProfilePage implements OnInit {
     this.util.show();
     this.api.post('users/getById', param).then((data: any) => {
       this.util.hide();
-      console.log('user info=>', data);
+    // console.log('user info=>', data);
       if (data && data.status === 200 && data.data && data.data.length) {
         const info = data.data[0];
         this.util.userInfo = info;
@@ -59,10 +51,9 @@ export class EditProfilePage implements OnInit {
         this.email = info.email;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.hide();
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    })
+      this.util.errorToast('Algo ha ido mal');    })
   }
 
 
@@ -73,14 +64,14 @@ export class EditProfilePage implements OnInit {
         text: this.util.translate('Camera'),
         icon: 'camera',
         handler: () => {
-          console.log('camera clicked');
+        // console.log('camera clicked');
           this.upload('camera');
         }
       }, {
         text: this.util.translate('Gallery'),
         icon: 'images',
         handler: () => {
-          console.log('gallery clicked');
+        // console.log('gallery clicked');
           this.upload('gallery');
         }
       }, {
@@ -88,7 +79,7 @@ export class EditProfilePage implements OnInit {
         icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+        // console.log('Cancel clicked');
         }
       }]
     });
@@ -113,13 +104,12 @@ export class EditProfilePage implements OnInit {
     this.util.show(this.util.translate('updating...'));
     this.api.post('users/edit_profile', param).then((data: any) => {
       this.util.hide();
-      console.log(data);
+    // console.log(data);
       this.getProfile();
     }, error => {
       this.util.hide();
-      console.log(error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    });
+    // console.log(error);
+      this.util.errorToast('Algo ha ido mal');    });
   }
 
   back() {
@@ -139,19 +129,19 @@ export class EditProfilePage implements OnInit {
         sourceType: type === 'camera' ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY
       };
       this.camera.getPicture(options).then((url) => {
-        console.log('url->', url);
+      // console.log('url->', url);
         this.util.show('uploading');
         const alpha = {
           img: url,
           type: 'jpg'
         };
-        console.log('parma==>', alpha);
+      // console.log('parma==>', alpha);
         this.api.nativePost('users/upload_file', alpha).then((data) => {
           this.util.hide();
-          console.log('data', JSON.parse(data.data));
+        // console.log('data', JSON.parse(data.data));
           const info = JSON.parse(data.data);
           this.cover = info.data;
-          console.log('cover image', this.cover);
+        // console.log('cover image', this.cover);
           const param = {
             cover: this.cover,
             id: localStorage.getItem('uid')
@@ -159,27 +149,23 @@ export class EditProfilePage implements OnInit {
           this.util.show(this.util.translate('updating...'));
           this.api.post('users/edit_profile', param).then((update: any) => {
             this.util.hide();
-            console.log(update);
+          // console.log(update);
           }, error => {
             this.util.hide();
-            console.log(error);
-            this.util.errorToast(this.util.translate('Something went wrong'));
-          });
+          // console.log(error);
+            this.util.errorToast('Algo ha ido mal');          });
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.util.hide();
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        }).catch(error => {
-          console.log(error);
+          this.util.errorToast('Algo ha ido mal');        }).catch(error => {
+        // console.log(error);
           this.util.hide();
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       });
 
     } catch (error) {
-      console.log('error', error);
-      this.util.errorToast(this.util.translate('Something went wrong'));
-    }
+    // console.log('error', error);
+      this.util.errorToast('Algo ha ido mal');    }
   }
 
 }

@@ -14,7 +14,7 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="t"> {{util.translate('Profile')}} </ion-title>
+    <ion-title class="t"> Perfil </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="edit_flag = !edit_flag" *ngIf="edit_flag">
         <ion-icon slot="icon-only" name="pencil"></ion-icon>
@@ -42,8 +42,8 @@
             <ion-icon name="person-outline"></ion-icon>
           </div>
           <div class="content_div">
-            <span>{{util.translate('First name')}} &nbsp;- </span>
-            <ion-input type="text" [disabled]="edit_flag" [placeholder]="util.translate('First name')"
+            <span>Nombre &nbsp;- </span>
+            <ion-input type="text" [disabled]="edit_flag" [placeholder]="('Nombre')"
               [(ngModel)]="fname">
             </ion-input>
           </div>
@@ -54,8 +54,8 @@
             <ion-icon name="person-outline"></ion-icon>
           </div>
           <div class="content_div">
-            <span>{{util.translate('Last name')}} &nbsp;- </span>
-            <ion-input type="text" [disabled]="edit_flag" [placeholder]="util.translate('Last name')"
+            <span>Apellido &nbsp;- </span>
+            <ion-input type="text" [disabled]="edit_flag" [placeholder]="('Apellido')"
               [(ngModel)]="lname">
             </ion-input>
           </div>
@@ -66,8 +66,8 @@
             <ion-icon name="mail-outline"></ion-icon>
           </div>
           <div class="content_div">
-            <span>{{util.translate('Email')}} &nbsp;- </span>
-            <ion-input type="text" [disabled]="true" [placeholder]="util.translate('Email')" [(ngModel)]="email">
+            <span>Correo &nbsp;- </span>
+            <ion-input type="text" [disabled]="true" [placeholder]="('Correo')" [(ngModel)]="email">
             </ion-input>
           </div>
         </div>
@@ -77,8 +77,8 @@
             <ion-icon name="call-outline"></ion-icon>
           </div>
           <div class="content_div">
-            <span>{{util.translate('Mobile')}} &nbsp;- </span>
-            <ion-input type="text" [disabled]="edit_flag" [placeholder]="util.translate('Mobile')" [(ngModel)]="mobile">
+            <span>Teléfono &nbsp;- </span>
+            <ion-input type="text" [disabled]="edit_flag" [placeholder]="('Teléfono')" [(ngModel)]="mobile">
             </ion-input>
           </div>
         </div>

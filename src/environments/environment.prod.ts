@@ -1,20 +1,13 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
 export const environment = {
   production: true,
-  baseURL: 'https://api.telodelivery.com/index.php/',
-  mediaURL: 'https://api.telodelivery.com/uploads/',
+  baseURL: 'https://api.mrmandados.xyz/index.php/',
+  mediaURL: 'https://api.mrmandados.xyz/uploads/',
   onesignal: {
-    appId: 'ca3e9b79-01fa-4bc6-bca4-300a5576dee6',
-    googleProjectNumber: '300622673422',
-    restKey: 'MjNhYjcxMDEtOGVjYy00MDkzLWJiNmMtZDlkZjhlNDY0OTQ0'
+    appId: '50504fb7-0f02-41c5-8ccf-0d7e43b3247c',
+    googleProjectNumber: '176229806393',
+    restKey: 'M2Q4ZTdmYWMtMDkxYS00OTk4LWE0ZGMtNWYzMTI1YmYzZjky'
   },
-  authToken: '050902'
+  authToken: '050902',
+  client_ID: 'AVXjPymtX7wjlfu615NsL23dqAA56gSvmbiJBwL2zU2YjFX33fZHGbtfMBYpvj3wXtEcgaJARp9QnSNh',
+  secret_ID: 'ENe2-0IWNu2wiwGbfZ8TMVfqxqm3c-jSI60b6MThmyX3RKBXeBwRBwR2IYjfPPAjj9EoJNfkfIiMp58p'
 };

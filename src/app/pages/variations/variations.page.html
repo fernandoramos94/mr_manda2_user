@@ -76,17 +76,17 @@
   </div>
   <div class="footers">
     <ion-button (click)="addToCart()" expand="block" *ngIf="!sameProduct">
-      {{util.translate('Add')}} {{total ? this.util.currecny:'' }} {{total ? total : ''}}
+      Añadir {{total ? this.util.currecny:'' }} {{total ? total : ''}}
     </ion-button>
     <ion-row *ngIf="sameProduct">
       <ion-col size="6">
         <ion-button (click)="sameChoise()" expand="block">
-          {{util.translate('OK')}}
+          Listo
         </ion-button>
       </ion-col>
       <ion-col size="6">
         <ion-button (click)="sameProduct = !sameProduct;newItem = true" expand="block">
-          {{util.translate('Add new')}}
+          Añadir nuevo
         </ion-button>
       </ion-col>
     </ion-row>

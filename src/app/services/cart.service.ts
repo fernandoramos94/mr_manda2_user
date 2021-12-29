@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Injectable } from '@angular/core';
 import { UtilService } from './util.service';
 
@@ -40,7 +32,7 @@ export class CartService {
   ) {
     this.util.getCouponObservable().subscribe(data => {
       if (data) {
-        console.log('------------->>', data);
+      // console.log('------------->>', data);
         this.coupon = data;
         this.coupon.discount = parseFloat(data.discount);
         this.coupon.min = parseFloat(data.min);
@@ -48,20 +40,20 @@ export class CartService {
       }
     });
     this.util.getKeys('userCart').then((data: any) => {
-      console.log('first???', data);
+    // console.log('first???', data);
       if (data && data !== null && data !== 'null') {
         const userCart = JSON.parse(data);
         if (userCart && userCart.length > 0) {
           this.cart = userCart;
           this.itemId = [...new Set(this.cart.map(item => item.id))];
           this.calcuate();
-          console.log('0???', data);
+        // console.log('0???', data);
         } else {
-          console.log('1???', data);
+        // console.log('1???', data);
           this.calcuate();
         }
       } else {
-        console.log('2???', data);
+      // console.log('2???', data);
         this.calcuate();
       }
     });
@@ -84,16 +76,16 @@ export class CartService {
 
   addVariations(info, cart, type) {
     if (type === 'new') {
-      console.log('-->> new--->>', info, cart);
+    // console.log('-->> new--->>', info, cart);
       this.cart.push(info);
       this.itemId.push(info.id);
     } else if (type === 'sameChoice') {
       const index = this.cart.findIndex(x => x.id === info.id);
-      console.log('index--', index);
+    // console.log('index--', index);
       this.cart[index].selectedItem = info.selectedItem;
     } else if (type === 'newCustom') {
       const index = this.cart.findIndex(x => x.id === info.id);
-      console.log('index--', index);
+    // console.log('index--', index);
       this.cart[index].selectedItem = info.selectedItem;
       this.cart[index].quantiy = info.quantiy;
     }
@@ -102,15 +94,15 @@ export class CartService {
   }
 
   addItem(item) {
-    console.log('item to adde', item);
+  // console.log('item to adde', item);
     this.cart.push(item);
     this.itemId.push(item.id);
     this.calcuate();
   }
 
   addQuantity(quantity, id) {
-    console.log('iddd-->>', id);
-    console.log('quantity', quantity);
+  // console.log('iddd-->>', id);
+  // console.log('quantity', quantity);
     this.cart.forEach(element => {
       if (element.id === id) {
         element.quantiy = quantity;
@@ -120,19 +112,20 @@ export class CartService {
   }
 
   removeItem(id) {
-    console.log('remove this item from cart');
-    console.log('current cart items', this.cart);
+  // console.log('remove this item from cart');
+  // console.log('current cart items', this.cart);
     this.cart = this.cart.filter(x => x.id !== id);
     this.itemId = this.itemId.filter(x => x !== id);
 
-    console.log('====>>>>>>>>>', this.cart);
-    console.log('items====>>>', this.itemId);
+  // console.log('====>>>>>>>>>', this.cart);
+  // console.log('items====>>>', this.itemId);
     this.calcuate();
   }
 
+
+  
+
   async calcuate() {
-    console.log('CART=======>', this.cart);
-    // new
     const item = this.cart.filter(x => x.quantiy > 0);
     this.cart.forEach(element => {
       if (element.quantiy === 0) {
@@ -143,7 +136,6 @@ export class CartService {
     this.totalItem = 0;
     this.cart = [];
     item.forEach(element => {
-      console.log('itemsss----->>>', element);
       if (element && element.selectedItem && element.selectedItem.length > 0 && element.size === '1') {
         let subPrice = 0;
         element.selectedItem.forEach(subItems => {
@@ -169,6 +161,8 @@ export class CartService {
         this.totalItem = this.totalItem + element.quantiy;
         this.totalPrice = this.totalPrice + (parseFloat(element.price) * parseInt(element.quantiy));
       }
+
+
       this.cart.push(element);
     });
     localStorage.removeItem('userCart');
@@ -176,7 +170,7 @@ export class CartService {
     this.util.clearKeys('userCart');
     this.util.setKeys('userCart', JSON.stringify(this.cart));
     this.totalPrice = parseFloat(this.totalPrice).toFixed(2);
-    const appTax = this.util.general && this.util.general.tax ? parseFloat(this.util.general.tax) : 21;
+    const appTax = this.util.general && this.util.general.tax ? parseFloat(this.util.general.tax) : 0;
     const tax = (parseFloat(this.totalPrice) * appTax) / 100;
     this.orderTax = tax.toFixed(2);
     let distance;
@@ -196,7 +190,7 @@ export class CartService {
     } else {
       this.deliveryPrice = 0;
     }
-    this.grandTotal = parseFloat(this.totalPrice) + parseFloat(this.orderTax) + parseFloat(this.deliveryPrice);
+    this.grandTotal = parseFloat(this.totalPrice)  + parseFloat(this.deliveryPrice);
     this.grandTotal = this.grandTotal.toFixed(2);
     if (this.coupon && this.coupon.code && this.totalPrice >= parseFloat(this.coupon.min)) {
       if (this.coupon.type === 'per') {
@@ -205,12 +199,12 @@ export class CartService {
         }
         const totalPrice = percentage(parseFloat(this.totalPrice).toFixed(2), this.coupon.discount);
         this.discount = totalPrice.toFixed(2);
-        this.grandTotal = parseFloat(this.totalPrice) + parseFloat(this.orderTax) + parseFloat(this.deliveryPrice);
+        this.grandTotal = parseFloat(this.totalPrice)  + parseFloat(this.deliveryPrice);
         this.grandTotal = this.grandTotal - this.discount;
         this.grandTotal = this.grandTotal.toFixed(2);
       } else {
         this.discount = this.coupon.discount;
-        this.grandTotal = parseFloat(this.totalPrice) + parseFloat(this.orderTax) + parseFloat(this.deliveryPrice);
+        this.grandTotal = parseFloat(this.totalPrice)  + parseFloat(this.deliveryPrice);
         this.grandTotal = this.grandTotal - this.discount;
         this.grandTotal = this.grandTotal.toFixed(2);
       }
@@ -239,7 +233,7 @@ export class CartService {
   }
 
   distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
-    console.log(lat1, lon1, lat2, lon2);
+  // console.log(lat1, lon1, lat2, lon2);
     const earthRadiusKm = 6371;
 
     const dLat = this.degreesToRadians(lat2 - lat1);

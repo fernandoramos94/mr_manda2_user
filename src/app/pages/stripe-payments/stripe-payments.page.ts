@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
@@ -40,12 +32,12 @@ export class StripePaymentsPage implements OnInit {
       id: this.cart.cartStoreInfo.uid
     };
     this.api.post('users/getById', param).then((data: any) => {
-      console.log('*******************', data);
+    // console.log('*******************', data);
       if (data && data.status === 200 && data.data && data.data.length) {
         this.storeFCM = data.data[0].fcm_token;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
     });
   }
 
@@ -54,10 +46,10 @@ export class StripePaymentsPage implements OnInit {
 
   getCards() {
     this.dummy = Array(10);
-    console.log(this.util.userInfo.stripe_key);
+  // console.log(this.util.userInfo.stripe_key);
     this.api.httpGet('https://api.stripe.com/v1/customers/' + this.util.userInfo.stripe_key +
       '/sources?object=card', this.util.stripe).subscribe((cards: any) => {
-        console.log(cards);
+      // console.log(cards);
         this.dummy = [];
         if (cards && cards.data) {
           this.cards = cards.data;
@@ -65,17 +57,16 @@ export class StripePaymentsPage implements OnInit {
         }
       }, (error) => {
         this.dummy = [];
-        console.log(error);
+      // console.log(error);
         if (error && error.error && error.error.error && error.error.error.message) {
           this.util.showErrorAlert(error.error.error.message);
           return false;
         }
-        this.util.errorToast(this.util.translate('Something went wrong'));
-      });
+        this.util.errorToast('Algo ha ido mal');      });
   }
 
   payment() {
-    console.log('place order');
+  // console.log('place order');
 
     swal.fire({
       title: this.util.translate('Are you sure?'),
@@ -87,34 +78,33 @@ export class StripePaymentsPage implements OnInit {
       backdrop: false,
       background: 'white'
     }).then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.value) {
-        console.log('go to procesed,,');
+      // console.log('go to procesed,,');
         const options = {
           amount: parseInt(this.cart.grandTotal) * 100,
           currency: this.util.stripeCode,
           customer: this.util.userInfo.stripe_key,
           card: this.token,
         };
-        console.log('options', options);
+      // console.log('options', options);
         const url = 'https://api.stripe.com/v1/charges';
         this.util.show();
         this.api.externalPost(url, options, this.util.stripe).subscribe((data: any) => {
-          console.log('------------------------->', data);
+        // console.log('------------------------->', data);
           this.paykey = data.id;
           this.util.hide();
           this.util.showToast(this.util.translate('Payment Success'), 'success', 'bottom');
           this.createOrder();
         }, (error) => {
           this.util.hide();
-          console.log(error);
+        // console.log(error);
           this.util.hide();
           if (error && error.error && error.error.error && error.error.error.message) {
             this.util.showErrorAlert(error.error.error.message);
             return false;
           }
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       }
     });
   }
@@ -140,11 +130,11 @@ export class StripePaymentsPage implements OnInit {
       notes: this.cart.orderNotes
     };
 
-    console.log('param----->', param);
+  // console.log('param----->', param);
 
     this.util.show();
     this.api.post('orders/save', param).then((data: any) => {
-      console.log(data);
+    // console.log(data);
       this.util.hide();
       this.cart.orderNotes = '';
       this.api.sendNotification('You have received new order', 'New Order Received', this.storeFCM);
@@ -152,9 +142,9 @@ export class StripePaymentsPage implements OnInit {
       this.cart.clearCart();
       this.navCtrl.navigateRoot(['/success']);
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.hide();
-      this.util.showToast(this.util.translate('Something went wrong'), 'danger', 'bottom');
+      this.util.showToast('Algo ha ido mal', 'danger', 'bottom');
     });
   }
 

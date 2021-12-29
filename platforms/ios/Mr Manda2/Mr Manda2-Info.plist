@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<string>This app requires to perform tasks in background.</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en_US</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mr Manda2</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.3.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>3.3.0</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict/>
+		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app requires bluetooth access to work properly.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This app requires bluetooth access to work properly.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app requires calendar access to set thier availability in terms of days and time.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires camera access for uploading profile picture.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contact access to share job related information with other users.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>This app requires document access to upload resumes.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires user location, based on user location it shows job availability.</string>
+	<key>NSLocationAlwaysandWhenInUseUsageDescription</key>
+	<string>This app requires user location, based on user location it shows job availability.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires user location, based on user location it shows job availability.</string>
+	<key>NSMainNibFile</key>
+	<string/>
+	<key>NSMainNibFile~ipad</key>
+	<string/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires microphone access to record messages to employer.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app requires device Motion access to work properly.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app requires photo libray access to upload document or images.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires photo libray access to upload document or images.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>CDVLaunchScreen</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+</dict>
+</plist>

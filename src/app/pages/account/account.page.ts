@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ApisService } from 'src/app/services/apis.service';
 import { Router, NavigationExtras } from "@angular/router";
@@ -117,7 +109,7 @@ export class AccountPage implements OnInit {
   }
 
   reviews() {
-    console.log('review');
+  // console.log('review');
     this.router.navigate(['choose-restaurant']);
   }
 }

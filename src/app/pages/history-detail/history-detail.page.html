@@ -35,7 +35,7 @@
 
     <div class="flex_div">
       <ion-label class="res_name" style="margin-top: 0px;">Tu órden</ion-label>
-      <ion-label class="fav_lbl" (click)="trackMyOrder()" *ngIf="status =='ongoing' || status =='accepted' ">
+      <ion-label class="fav_lbl" (click)="trackMyOrder()" *ngIf="status =='en camino' || status =='aceptada' ">
         Rastrear pedido
       </ion-label>
     </div>
@@ -86,10 +86,7 @@
       <span class="prise_lbl" *ngIf="util.cside === 'left'">{{util.currecny}} {{delivery_charge}}</span>
       <span class="prise_lbl" *ngIf="util.cside === 'right'">{{delivery_charge}} {{util.currecny}}</span>
     </ion-label>
-    <ion-label style="margin-top: 5px; font-size: 14px">Cargo por servicio
-      <span class="prise_lbl" *ngIf="util.cside === 'left'">{{util.currecny}} {{serviceTax}}</span>
-      <span class="prise_lbl" *ngIf="util.cside === 'right'">{{serviceTax}} {{util.currecny}}</span>
-    </ion-label>
+
     <ion-label style="margin-top: 5px; font-size: 14px">Total
       <span class="prise_lbl" *ngIf="util.cside === 'left'">{{util.currecny}} {{grandTotal}}</span>
       <span class="prise_lbl" *ngIf="util.cside === 'right'">{{grandTotal}} {{util.currecny}}</span>
@@ -103,8 +100,6 @@
     <ion-label class="small_lbl">#{{id}}</ion-label>
     <ion-label class="head_gray">Notas</ion-label>
     <ion-label class="small_lbl">{{orderNotes}}</ion-label>
-    <ion-label class="head_gray">Método de pago</ion-label>
-    <ion-label class="small_lbl">{{util.translate('Paid :')}} {{paid}} </ion-label>
     <ion-label class="head_gray">Fecha</ion-label>
     <ion-label class="small_lbl">{{time}}</ion-label>
     <ion-label class="head_gray">Entregar en</ion-label>
@@ -112,10 +107,10 @@
 
     <div class="line_div"></div>
 
-    <ion-label class="red_lbl" *ngIf="status =='creada' ||status =='ongoing' || status =='accepted' " (click)="call()">
-      Llamar al comercio {{restName}}</ion-label>
+    <ion-label class="red_lbl" *ngIf="status =='creada' ||status =='en camino' || status =='accepted' " (click)="call()">
+      Llamar a Mr Manda2 </ion-label>
 
-    <ion-label class="red_lbl" *ngIf="status =='ongoing' || status =='accepted' " (click)="driverCall()">
+    <ion-label class="red_lbl" *ngIf="status =='en camino' || status =='' " (click)="driverCall()">
      Llamar al repartidor {{driverName}}</ion-label>
 
 

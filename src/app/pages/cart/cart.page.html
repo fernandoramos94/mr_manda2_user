@@ -133,11 +133,7 @@
           <ion-label class="price" *ngIf="util.cside ==='left'"> - {{util.currecny}} {{cart.discount}}</ion-label>
           <ion-label class="price" *ngIf="util.cside ==='right'"> - {{cart.discount}} {{util.currecny}} </ion-label>
         </div>
-        <div class="singleRow">
-          <ion-label class="headerTitle">{{util.translate('Taxes & Charges')}} ({{cart.flatTax}} %) </ion-label>
-          <ion-label class="price" *ngIf="util.cside ==='left'">{{util.currecny}} {{cart.orderTax}}</ion-label>
-          <ion-label class="price" *ngIf="util.cside ==='right'">{{cart.orderTax}} {{util.currecny}} </ion-label>
-        </div>
+     
 
       </div>
       <p class="instructions">
@@ -152,7 +148,7 @@
     <ion-label color="light" *ngIf="util.cside ==='left'"> {{util.currecny}}{{cart.grandTotal}}
       Total</ion-label>
     <ion-label color="light" *ngIf="util.cside ==='right'">
-      {{cart.grandTotal}} {{util.currecny}} Total</ion-label>
+      {{cart.totalPrice}} {{util.currecny}} Total</ion-label>
     <ion-button slot="end" fill="clear" color="light">
       Continuar
     </ion-button>

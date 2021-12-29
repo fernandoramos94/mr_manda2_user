@@ -11,9 +11,7 @@
   <ion-toolbar>
     <ion-title>Órdenes recientes</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="util.openMenu()">
-        <img class="menuIcon" src="assets/sidemenu/menu.png" alt="">
-      </ion-button>
+ 
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -45,8 +43,7 @@
     </div>
     <div class="noData" *ngIf="!haveItems && !dummy?.length">
       <img src="assets/runing.gif" alt="" class="noDataImg">
-      <ion-label>Aún no hay órdenes recientes</ion-label>
-      <ion-label>¡Órdena en tus comercios favoritos! </ion-label>
+  
       <ion-button (click)="getCart()" expand="block" fill="outline">
         Buscar comercios
       </ion-button>
@@ -100,18 +97,18 @@
 
         <div class="line_div"></div>
 
-        <div class="status_detail" *ngIf="item.status =='completed' || item.status == 'delivered'">
+        <div class="status_detail" *ngIf="item.status =='entregada' || item.status == 'delivered'">
           <div class="deliver_div">
             Entregada
           </div>
         </div>
-        <div class="status_detail" *ngIf="item.status =='cancelada' || item.status == 'cancel'">
+        <div class="status_detail" *ngIf="item.status =='cancelada' || item.status == ''">
           <div class="deliver_div">
             Orden {{item.status}}
           </div>
         </div>
         <div class="status_detail"
-          *ngIf="item.status =='creada' || item.status =='ongoing' || item.status === 'accepted'">
+          *ngIf="item.status =='creada' || item.status =='en camino' || item.status === 'aceptada'">
           <div class="deliver_div">
             Orden {{item.status}}
           </div>

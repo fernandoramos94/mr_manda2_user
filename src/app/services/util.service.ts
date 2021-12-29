@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Injectable } from '@angular/core';
 import { LoadingController, AlertController, ToastController, NavController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -1459,6 +1451,109 @@ export class UtilService {
     } else {
       return true;
     }
+  }
+
+  async findMessageByStatusDetail(status_detail, cb) {
+    // console.log("status detail > ", status_detail);
+    
+    var messageToShow: any;
+    var responseCheckout = [
+      {
+        "status": "approved",
+        "status_detail": "accredited",
+        "message": "¡Listo! Se acreditó tu pago. En tu resumen verás el monto."
+      },
+      {
+        "status": "in_process",
+        "status_detail": "pending_contingency",
+        "message": "Estamos procesando tu pago. No te preocupes"
+      },
+      {
+        "status": "in_process",
+        "status_detail": "pending_review_manual",
+        "message": "Estamos procesando tu pago. No te preocupes"
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_bad_filled_card_number",
+        "message": "Revisa el número de tarjeta."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_bad_filled_date",
+        "message": "Revisa la fecha de vencimiento."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_bad_filled_other",
+        "message": "Revisa los datos."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_bad_filled_security_code",
+        "message": "Revisa el código de seguridad de la tarjeta."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_blacklist",
+        "message": "No pudimos procesar tu pago."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_call_for_authorize",
+        "message": "Debes autorizar ante payment_method_id el pago de amount."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_card_disabled",
+        "message": "Llama a tu metodo de pago para activar tu tarjeta o usa otro medio de pago. El teléfono está al dorso de tu tarjeta."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_card_error",
+        "message": "No pudimos procesar tu pago."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_duplicated_payment",
+        "message": "Ya hiciste un pago por ese valor. Si necesitas volver a pagar usa otra tarjeta u otro medio de pago."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_high_risk",
+        "message": "Tu pago fue rechazado. Elige otro de los medios de pago"
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_insufficient_amount",
+        "message": "Tu tarjeta no tiene fondos suficientes."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_invalid_installments",
+        "message": "El metodo de pago no procesa pagos en esa cantidad de cuotas."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_max_attempts",
+        "message": "Llegaste al límite de intentos permitidos. Elige otra tarjeta u otro medio de pago."
+      },
+      {
+        "status": "rejected",
+        "status_detail": "cc_rejected_other_reason",
+        "message": "Tu tarjeta no procesó el pago. Errores de ingreso de datos"
+      }
+    ]
+
+    for (let i = 0; i < responseCheckout.length; i++) {
+      var res = responseCheckout[i];
+      if (res.status_detail == status_detail) {
+        messageToShow = res.message;
+      }
+    }
+
+    cb(messageToShow)
+    // return messageToShow;
   }
 
 

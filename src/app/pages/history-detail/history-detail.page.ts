@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
@@ -60,7 +52,7 @@ export class HistoryDetailPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
-      console.log('data=>', data);
+    // console.log('data=>', data);
       if (data.hasOwnProperty('id')) {
         this.id = data.id;
         this.getOrder();
@@ -74,7 +66,7 @@ export class HistoryDetailPage implements OnInit {
     };
     this.api.post('orders/getById', param).then((datas: any) => {
       this.loaded = true;
-      console.log(datas);
+    // console.log(datas);
       if (datas && datas.status === 200 && datas.data.length) {
         const data = datas.data[0];
         this.util.orderDetails = data;
@@ -96,6 +88,7 @@ export class HistoryDetailPage implements OnInit {
         this.dicount = data.discount;
         this.restPhone = data.str_mobile;
         this.restFCM = data.str_fcm_token;
+      // console.log("FCM RESTAURANTEEE", this.restFCM)
         if (data && data.address) {
           const add = JSON.parse(data.address);
           this.deliveryAddress = add.house + ' ' + add.landmark + ' ' + add.address + add.pincode;
@@ -105,11 +98,11 @@ export class HistoryDetailPage implements OnInit {
         this.util.back();
       }
     }, error => {
-      console.log('error in orders', error);
+    // console.log('error in orders', error);
       this.loaded = true;
       this.util.errorToast('Something went wrong');
     }).catch(error => {
-      console.log('error in order', error);
+    // console.log('error in order', error);
       this.loaded = true;
       this.util.errorToast('Something went wrong');
     });
@@ -126,12 +119,12 @@ export class HistoryDetailPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Si',
           handler: () => {
-            console.log('Confirm Okay');
+          // console.log('Confirm Okay');
             this.router.navigate(['rate']);
           }
         }
@@ -151,7 +144,7 @@ export class HistoryDetailPage implements OnInit {
   }
   call() {
     if (this.restPhone) {
-      this.iab.create('tel:' + this.restPhone, '_system');
+      this.iab.create('tel:' + '55 54613890', '_system');
     }
   }
 
@@ -160,21 +153,21 @@ export class HistoryDetailPage implements OnInit {
       id: this.dId
     };
     this.api.post('drivers/getById', param).then((data: any) => {
-      console.log('driver info--->>', data);
+    // console.log('driver info--->>', data);
       if (data && data.status === 200 && data.data.length) {
         const info = data.data[0];
         this.util.orderDetails['driverInfo'] = info;
-        console.log('---->>>>>', info);
+      // console.log('---->>>>>', info);
         this.driverName = info.first_name + ' ' + info.last_name;
         this.driverMobile = info.mobile;
         this.driverCover = info.cover;
         this.driverFCM = info.fcm_token;
       }
     }, error => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     }).catch((error) => {
-      console.log(error);
+    // console.log(error);
       this.util.errorToast('Something went wrong');
     });
   }
@@ -209,25 +202,25 @@ export class HistoryDetailPage implements OnInit {
       backdrop: false,
       background: 'white'
     }).then((data) => {
-      console.log(data);
+    // console.log(data);
       if (data && data.value) {
-        console.log('cancle,delivered');
+      // console.log('cancle,delivered');
         const value = 'cancelada';
         const param = {
           id: this.id,
           status: value,
         };
-        console.log('order param', param);
+      // console.log('order param', param);
         this.util.show(this.util.translate('Please wait'));
         this.api.post('orders/editList', param).then((order) => {
-          console.log(order);
+        // console.log(order);
           if (order && order.status === 200) {
             if (this.dId && this.dId !== '' && this.dId !== '0') {
               const driverParam = {
                 id: this.dId,
                 current: 'active'
               };
-              console.log('driver param', driverParam);
+            // console.log('driver param', driverParam);
               this.api.post('drivers/edit_profile', driverParam).then((driver) => {
                 if (driver && driver.status === 200) {
                   this.util.hide();
@@ -244,18 +237,15 @@ export class HistoryDetailPage implements OnInit {
                   this.navCtrl.back();
                 } else {
                   this.util.hide();
-                  this.util.errorToast(this.util.translate('Something went wrong'));
-                  this.navCtrl.back();
+                  this.util.errorToast('Algo ha ido mal');                  this.navCtrl.back();
                 }
               }, error => {
-                console.log(error);
+              // console.log(error);
                 this.util.hide();
-                this.util.errorToast(this.util.translate('Something went wrong'));
-              }).catch(error => {
-                console.log(error);
+                this.util.errorToast('Algo ha ido mal');              }).catch(error => {
+              // console.log(error);
                 this.util.hide();
-                this.util.errorToast(this.util.translate('Something went wrong'));
-              });
+                this.util.errorToast('Algo ha ido mal');              });
             } else {
               this.util.hide();
               this.navCtrl.back();
@@ -263,18 +253,15 @@ export class HistoryDetailPage implements OnInit {
             // edit_profile
           } else {
             this.util.hide();
-            this.util.errorToast(this.util.translate('Something went wrong'));
-            this.navCtrl.back();
+            this.util.errorToast('Algo ha ido mal');            this.navCtrl.back();
           }
         }, error => {
-          console.log(error);
+        // console.log(error);
           this.util.hide();
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        }).catch(error => {
-          console.log(error);
+          this.util.errorToast('Algo ha ido mal');        }).catch(error => {
+        // console.log(error);
           this.util.hide();
-          this.util.errorToast(this.util.translate('Something went wrong'));
-        });
+          this.util.errorToast('Algo ha ido mal');        });
       }
     });
   }

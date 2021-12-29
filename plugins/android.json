@@ -7,58 +7,55 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
     "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
-    "cordova-plugin-androidx-adapter": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+    "cordova-plugin-geolocation": {
+      "GPS_REQUIRED": "true",
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-ionic-webview": {
-      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+    "cordova-plugin-advanced-http": {
+      "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1",
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
-    "cordova.plugins.diagnostic": {
-      "ANDROIDX_VERSION": "1.+",
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     },
     "onesignal-cordova-plugin": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+      "PACKAGE_NAME": "com.mrmandados.usuario"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.mrmandados.usuario"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.foods5phpUser.app"
+      "PACKAGE_NAME": "com.mrmandados.usuarios"
     }
   }
 }

@@ -1,12 +1,4 @@
-/*
-  Authors : initappz (Rahul Jograna)
-  Website : https://initappz.com/
-  App Name : ionic 5 foodies app
-  Created : 28-Feb-2021
-  This App Template Source code is licensed as per the
-  terms found in the Website https://initappz.com/license
-  Copyright and Good Faith Purchasers © 2020-present initappz.
-*/
+   //
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
@@ -167,8 +159,49 @@ const routes: Routes = [
     loadChildren: () => import('./pages/select-country/select-country.module').then(m => m.SelectCountryPageModule)
   },
   {
+    path: 'schedule-order',
+    loadChildren: () => import('./pages/schedule-order/schedule-order.module').then(m => m.ScheduleOrderPageModule)
+  },
+  {
     path: 'success',
     loadChildren: () => import('./pages/success/success.module').then(m => m.SuccessPageModule)
+  },
+
+  {
+    path: 'bebidas',
+    loadChildren: () => import('./CATEGORIAS/bebidas/bebidas.module').then( m => m.BebidasPageModule)
+  },
+  {
+    path: 'comida',
+    loadChildren: () => import('./CATEGORIAS/comida/comida.module').then( m => m.ComidaPageModule)
+  },
+
+  {
+    path: 'supermercado',
+    loadChildren: () => import('./CATEGORIAS/supermercado/supermercado.module').then( m => m.SupermercadoPageModule)
+  },
+
+
+  {
+    path: 'buscador',
+    loadChildren: () => import('./CATEGORIAS/buscador/buscador.module').then( m => m.BuscadorPageModule)
+  },
+
+  {
+    path: 'cafeypan',
+    loadChildren: () => import('./CATEGORIAS/cafeypan/cafeypan.module').then( m => m.CafeypanPageModule)
+  },
+  {
+    path: 'salud',
+    loadChildren: () => import('./CATEGORIAS/salud/salud.module').then( m => m.SaludPageModule)
+  },
+  {
+    path: 'hogaryferreteria',
+    loadChildren: () => import('./CATEGORIAS/hogaryferreteria/hogaryferreteria.module').then( m => m.HogaryferreteriaPageModule)
+  },
+  {
+    path: 'conveniencia',
+    loadChildren: () => import('./CATEGORIAS/conveniencia/conveniencia.module').then( m => m.ConvenienciaPageModule)
   },
 ];
 @NgModule({
